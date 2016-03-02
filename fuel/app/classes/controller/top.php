@@ -33,18 +33,6 @@ class Controller_Top extends Controller
 	}
 
 	/**
-	 * A typical "Hello, Bob!" type example.  This uses a Presenter to
-	 * show how to use them.
-	 *
-	 * @access  public
-	 * @return  Response
-	 */
-	public function action_hello()
-	{
-		return Response::forge(Presenter::forge('welcome/hello'));
-	}
-
-	/**
 	 * The 404 action for the application.
 	 *
 	 * @access  public
