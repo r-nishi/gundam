@@ -34,9 +34,11 @@
     <?php echo Form::close() ?>
     <?php
     if (!empty($sum_dame)) {
-        echo "合計ダメージ：".$sum_dame;
+        echo "<p>合計ダメージ：".$sum_dame."</p>";
     }
     ?>
+    <br />
+    <p><a class="btn btn-primary btn-lg" href="../top">TOPに戻る</a></p>
     <footer>
     </footer>
 </div>
