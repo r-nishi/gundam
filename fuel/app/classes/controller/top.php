@@ -13,9 +13,6 @@
 /**
  * The Welcome Controller.
  *
- * A basic controller example.  Has examples of how to set the
- * response body and status.
- *
  * @package  app
  * @extends  Controller
  */

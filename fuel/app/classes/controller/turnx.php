@@ -11,10 +11,6 @@
  */
 
 /**
- * The Welcome Controller.
- *
- * A basic controller example.  Has examples of how to set the
- * response body and status.
  *
  * @package  app
  * @extends  Controller
@@ -104,6 +100,7 @@ class Controller_Turnx extends Controller
                     } else {
                         // 累計補正値が適用された単発ダメージを計算し合計ダメージに加算する
                         $sum_dam += $value2['damage'] * (1 - $sum_sca);
+                        $sum_dam = ceil($sum_dam); //小数点以下を切り上げる
                     }
                     $sum_sca += $decimal_fraction; // 単発補正値を累計補正値に加算する
                 }
