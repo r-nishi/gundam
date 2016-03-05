@@ -29,7 +29,7 @@ class Controller_Turnx extends Controller
     public function action_turnx()
     {
         $this->main_shooting_array = array(
-            "main" => array(
+            "メイン" => array(
                 "damage"         => 75,  // ダメージ
                 "down_point"     => 2.0, // ダウン値
                 "damage_scaling" => 30,  // 補正値
@@ -39,7 +39,7 @@ class Controller_Turnx extends Controller
                 "down_point"     => 6.0,
                 "damage_scaling" => 40
             ),
-            "sub" => array(
+            "サブ" => array(
                 "damage"         => 111,
                 "down_point"     => 2.7,
                 "damage_scaling" => 40
@@ -57,13 +57,14 @@ class Controller_Turnx extends Controller
 	{
         $this->action_turnx();
 
-        $main_shooting_array = array(
-            "main" => "メイン",
-            "sub"  => "サブ",
-            "CS"   => "CS"
-        );
+        // セレクトボックス作成
+        $select_list = array();
+        foreach($this->main_shooting_array as $key => $value){
+            $select_list[$key] = $key;
+        }
+
         $view = View::forge('turnx/index');
-        $view->set('select_list',$main_shooting_array);
+        $view->set('select_list',$select_list);
         if(!empty($sum_dame)){
             $view->set('sum_dame',$sum_dame);
         }

@@ -4,6 +4,7 @@
     <meta charset="utf-8">
     <title>ガンダムコンボサイト</title>
     <?php echo Asset::css('bootstrap.css'); ?>
+    <?php echo Asset::js('down_data.js') ?>
     <style>
         a{
             color: #883ced;
