@@ -30,7 +30,7 @@
     <?php echo Form::select(1, Input::post('type'), $select_list) ?> >>
     <?php echo Form::select(2, Input::post('type'), $select_list) ?> >>
     <?php echo Form::select(3, Input::post('type'), $select_list) ?>
-    <?php echo Form::button('button') ?>
+    <input type="submit" value="計算"><?php //echo Form::button('button') ?>
     <?php echo Form::close() ?>
     <?php
     if (!empty($sum_dame)) {

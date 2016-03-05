@@ -77,8 +77,10 @@ class Controller_Turnx extends Controller
     {
         $this->action_turnx();
 
-        $sum_dam = 0; // ダメージ合計値
-        $sum_sca = 0; // 累計補正値
+        $sum_dame = 0; // ダメージ合計値
+        $sum_scal = 0; // 累計補正値
+        $sum_down = 0; // 累計ダウン値
+        $down_flg = 0; // ダウン値用フラグ
 
         // POSTで受け取る
         $data = Input::post();
@@ -91,22 +93,32 @@ class Controller_Turnx extends Controller
                 if ($value == $key) {
 
                     $decimal_fraction = 0; // 少数表記された単発補正値を入れる
-                    // $damage = 0;           // 累計補正された単発ダメージを入れる
 
                     $decimal_fraction = $value2['damage_scaling'] / 100; // 少数表記に 0.3など
 
-                    if ($sum_dam == 0) {
-                        $sum_dam = $value2['damage'];
+                    if ($sum_dame == 0) {
+                        $sum_dame = $value2['damage'];
                     } else {
                         // 累計補正値が適用された単発ダメージを計算し合計ダメージに加算する
-                        $sum_dam += $value2['damage'] * (1 - $sum_sca);
-                        $sum_dam = ceil($sum_dam); //小数点以下を切り上げる
+                        $sum_dame += $value2['damage'] * (1 - $sum_scal);
+                        $sum_dame = ceil($sum_dame); //小数点以下を切り上げる
                     }
-                    $sum_sca += $decimal_fraction; // 単発補正値を累計補正値に加算する
+                    $sum_scal += $decimal_fraction; // 単発補正値を累計補正値に加算する
+
+                    // ダウン値計算
+                    if ($value2['down_point'] >= 5){
+                    	$down_flg = 1;
+                    } else {
+                    	$sum_down += $value2['down_point'];
+                    }
                 }
             }
+            // ダウン値フラグ確認
+            if ($down_flg > 0){
+            	break;
+            }
         }
-        return $this->action_index($sum_dam);
+        return $this->action_index($sum_dame);
     }
 
 	/**
