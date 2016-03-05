@@ -25,7 +25,7 @@
 </header>
 <div class="container">
     <hr/>
-    <p><a class="btn btn-primary btn-lg" href="../turnx/index">ターンX</a></p>
+    <p><a class="btn btn-primary btn-lg" href="./turnx/index">ターンX</a></p>
     <footer>
     </footer>
 </div>
