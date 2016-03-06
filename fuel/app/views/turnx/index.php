@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>ガンダムコンボサイト</title>
     <?php echo Asset::css('bootstrap.css'); ?>
-    <?php echo Asset::js('check_down.js') ?>
+    <?php echo Asset::js('downCheck.js') ?>
     <style>
         a{
             color: #883ced;
@@ -27,12 +27,20 @@
 <div class="container">
     <hr/>
     <p>ターンX</p>
-    <?php echo Form::open('turnx/calculation') ?>
-    <?php echo Form::select(1, Input::post('type'), $select_list) ?> >>
-    <?php echo Form::select(2, Input::post('type'), $select_list) ?> >>
-    <?php echo Form::select(3, Input::post('type'), $select_list) ?>
-    <input type="submit" value="計算"><?php //echo Form::button('button') ?>
+
+    <?php echo Form::open(array('action'=>'turnx/calculation','method'=>'post','name'=>'myForm')) ?>
+
+        <select name="mySelect" onchange="downCheck();">
+            <option value="">選択</option>
+            <?php foreach ($select_list as $key): ?>
+                <option value="<?php echo $key ?>"><?php echo $key ?></option>
+            <?php endforeach ?>
+        </select>
+        >>
+
+        <input type="submit" value="計算">
     <?php echo Form::close() ?>
+
     <?php
     if (!empty($sum_dame)) {
         echo "<p>合計ダメージ：".$sum_dame."</p>";
