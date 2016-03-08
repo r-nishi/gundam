@@ -52,15 +52,14 @@
     }
     ?>
     <br />
-    <p><a class="btn btn-primary btn-lg" href="../top">TOPに戻る</a></p>
+    <p><a class="btn btn-primary btn-lg" href="../top/index">TOPに戻る</a></p>
 
     <div hidden id="hidden">1</div>
 
-    <footer>
-    </footer>
 </div>
+<footer>
+</footer>
 </body>
-
 <script type="text/javascript">
     // フォームを追加する
     function addCheck(){
@@ -97,5 +96,4 @@
         document.getElementById("selectBox").innerHTML = select_box_code + makeHtmlCode;
     }
 </script>
-
 </html>

@@ -19,15 +19,15 @@
 <header>
     <div class="container">
         <h1>ガンダムコンボサイト</h1>
-        <p>主にEXVSFBのTX</p>
         <p>※開発途中です</p>
     </div>
 </header>
 <div class="container">
     <hr/>
-    <p><a class="btn btn-primary btn-lg" href="./turnx/index">ターンX</a></p>
-    <footer>
-    </footer>
+    <p><a class="btn btn-primary btn-lg" href="../turnx/index">ターンX</a></p>
+    <p><a class="btn btn-primary btn-lg" href="../about/index">about</a></p>
 </div>
+<footer>
+</footer>
 </body>
 </html>

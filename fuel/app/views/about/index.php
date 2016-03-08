@@ -19,7 +19,6 @@
 <header>
     <div class="container">
         <h1>ガンダムコンボサイト</h1>
-        <p>主にEXVSFBのTX</p>
         <p>※開発途中です</p>
     </div>
 </header>
@@ -46,6 +45,8 @@
     <h3>■コンタクト</h3>
     下記Twitter垢までお気軽にご連絡ください<br>
     https://twitter.com/Ryu24P<br>
+    <br>
+    <p><a class="btn btn-primary btn-lg" href="../top/index">TOPに戻る</a></p>
 </div>
 <footer>
 </footer>
