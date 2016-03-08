@@ -4,7 +4,6 @@
     <meta charset="utf-8">
     <title>ガンダムコンボサイト</title>
     <?php echo Asset::css('bootstrap.css') ?>
-    <?php echo Asset::js('downCheck.js') ?>
     <style>
         a{
             color: #883ced;
@@ -28,22 +27,20 @@
     <hr/>
     <p>ターンX</p>
 
+    <!-- ▼Form▼ -->
     <?php echo Form::open(array('action'=>'turnx/calculation','method'=>'post','name'=>'myForm')) ?>
-
         <div id="selectBox">
-            <select onchange="addCheck();">
+            <select name="atk1" onchange="addCheck()">
                 <option value="">選択</option>
                 <?php foreach ($select_list as $key): ?>
-                    <option value="<?php echo $key ?>"><?php echo $key ?></option>
+                    <option value="<?php echo $key ?>" name="<?php echo $key ?>"><?php echo $key ?></option>
                 <?php endforeach ?>
             </select>
             >>
         </div>
-
-
         <input type="submit" value="計算">
-
     <?php echo Form::close() ?>
+    <!-- ▲Form▲ -->
 
     <?php
     if (!empty($sum_dame)) {
@@ -53,26 +50,47 @@
     <br />
     <p><a class="btn btn-primary btn-lg" href="../top">TOPに戻る</a></p>
 
+    <div hidden id="hidden">1</div>
+
     <footer>
     </footer>
 </div>
 </body>
 
 <script type="text/javascript">
+    // フォームを追加する
     function addCheck(){
+        // セレクトボックスの数を取得
+        var getNumbers = document.getElementById("hidden").innerHTML;
+        // キャストしてインクリメント
+        var numbers = parseInt(getNumbers) + 1;
+        // 値を更新
+        document.getElementById("hidden").innerHTML = numbers;
+
+        // セレクトボックスを新規作成
+        var makeHtmlCode =
+            '<select name="atk' + numbers + '" onchange="addCheck();">' +
+                '<option value="">選択</option>' +
+                '<?php foreach ($select_list as $key): ?>' +
+                    '<option value="<?php echo $key ?>"><?php echo $key ?></option>' +
+                '<?php endforeach ?>' +
+            '</select> >> ';
+
+        // 新しいセレクトボックスを作るための<div>タグを作成
+        var div_element = document.createElement("div");
+        div_element.innerHTML = makeHtmlCode;
+
+        // selectBoxに新規作成したセレクトボックスを追記する
+        var select_box_element = document.getElementById("selectBox");
+        select_box_element.appendChild(div_element);
+
+    }
+
+    // 念のため2つ目の方法を残しておく
+    function addCheckPart2(){
         var makeHtmlCode = '<select onchange="addCheck();"><option value="">選択</option><?php foreach ($select_list as $key): ?><option value="<?php echo $key ?>"><?php echo $key ?></option><?php endforeach ?></select> >> ';
         var select_box_code = document.getElementById("selectBox").innerHTML;
         document.getElementById("selectBox").innerHTML = select_box_code + makeHtmlCode;
-    }
-    // 2つ目の方法を残しておく
-    function addCheckPart2(){
-         var makeHtmlCode = '<select onchange="addCheck();"><option value="">選択</option><?php foreach ($select_list as $key): ?><option value="<?php echo $key ?>"><?php echo $key ?></option><?php endforeach ?></select> >> ';
-
-         var div_element = document.createElement("div");
-         div_element.innerHTML = makeHtmlCode;
-
-         var select_box_element = document.getElementById("selectBox");
-         select_box_element.appendChild(div_element);
     }
 </script>
 

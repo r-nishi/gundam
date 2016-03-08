@@ -86,8 +86,18 @@ class Controller_Turnx extends Controller
         // POSTで受け取る
         $data = Input::post();
 
+        // debug用コード
+//        echo "<pre>";
+//        print_r($data);
+//        echo "</pre>";
+
         // 受け取ったPOSTを空になるまで回す
         foreach($data as $value){
+
+            // 無効な値が入ってきたらループを止める
+            if(empty($value)){
+                break;
+            }
 
             // ダメージデータ表を回す
             foreach ($this->main_shooting_array as $key => $value2) {
@@ -107,14 +117,14 @@ class Controller_Turnx extends Controller
                     $sum_scal += $decimal_fraction; // 単発補正値を累計補正値に加算する
 
                     // ダウン値計算
-                    if ($value2['down_point'] >= 5){
-                    	$down_flg = 1;
-                    } else {
-                    	$sum_down += $value2['down_point'];
+                    $sum_down += $value2['down_point'];
+                    if ($sum_down >= 5){
+                        $down_flg = 1;
                     }
                 }
             }
-            // ダウン値フラグ確認
+
+            // ダウン値確認
             if ($down_flg > 0){
             	break;
             }
