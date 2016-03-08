@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <title>ガンダムコンボサイト</title>
-    <?php echo Asset::css('bootstrap.css'); ?>
+    <?php echo Asset::css('bootstrap.css') ?>
     <?php echo Asset::js('downCheck.js') ?>
     <style>
         a{
@@ -30,15 +30,19 @@
 
     <?php echo Form::open(array('action'=>'turnx/calculation','method'=>'post','name'=>'myForm')) ?>
 
-        <select name="mySelect" onchange="downCheck();">
-            <option value="">選択</option>
-            <?php foreach ($select_list as $key): ?>
-                <option value="<?php echo $key ?>"><?php echo $key ?></option>
-            <?php endforeach ?>
-        </select>
-        >>
+        <div id="selectBox">
+            <select onchange="addCheck();">
+                <option value="">選択</option>
+                <?php foreach ($select_list as $key): ?>
+                    <option value="<?php echo $key ?>"><?php echo $key ?></option>
+                <?php endforeach ?>
+            </select>
+            >>
+        </div>
+
 
         <input type="submit" value="計算">
+
     <?php echo Form::close() ?>
 
     <?php
@@ -48,8 +52,28 @@
     ?>
     <br />
     <p><a class="btn btn-primary btn-lg" href="../top">TOPに戻る</a></p>
+
     <footer>
     </footer>
 </div>
 </body>
+
+<script type="text/javascript">
+    function addCheck(){
+        var makeHtmlCode = '<select onchange="addCheck();"><option value="">選択</option><?php foreach ($select_list as $key): ?><option value="<?php echo $key ?>"><?php echo $key ?></option><?php endforeach ?></select> >> ';
+        var select_box_code = document.getElementById("selectBox").innerHTML;
+        document.getElementById("selectBox").innerHTML = select_box_code + makeHtmlCode;
+    }
+    // 2つ目の方法を残しておく
+    function addCheckPart2(){
+         var makeHtmlCode = '<select onchange="addCheck();"><option value="">選択</option><?php foreach ($select_list as $key): ?><option value="<?php echo $key ?>"><?php echo $key ?></option><?php endforeach ?></select> >> ';
+
+         var div_element = document.createElement("div");
+         div_element.innerHTML = makeHtmlCode;
+
+         var select_box_element = document.getElementById("selectBox");
+         select_box_element.appendChild(div_element);
+    }
+</script>
+
 </html>
