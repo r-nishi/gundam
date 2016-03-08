@@ -19,26 +19,26 @@
 <header>
     <div class="container">
         <h1>ガンダムコンボサイト</h1>
-        <p>主にEXVSFBのTX</p>
         <p>※開発途中です</p>
     </div>
 </header>
 <div class="container">
     <hr/>
-    <p>ターンX</p>
+    <h3>■ターンX</h3>
+    <p><?php echo Asset::img('turnx.png') ?></p>
+    <br>
 
+    <p>コンボ計算</p>
     <!-- ▼Form▼ -->
     <?php echo Form::open(array('action'=>'turnx/calculation','method'=>'post','name'=>'myForm')) ?>
-        <div id="selectBox">
+        <div id="selectBox" style="display:flex; padding-bottom:10px;">
             <select name="atk1">
                 <option value="">選択</option>
                 <?php foreach ($select_list as $key): ?>
                     <option value="<?php echo $key ?>" name="<?php echo $key ?>"><?php echo $key ?></option>
                 <?php endforeach ?>
             </select>
-            >>
         </div>
-
 
         <a class="btn btn-primary btn" onclick="addCheck()">追加</a>
         <a class="btn btn-primary btn">削除</a>
@@ -47,8 +47,11 @@
     <!-- ▲Form▲ -->
 
     <?php
+    if (!empty($sum_name)) {
+        echo "<p><div>".$sum_name."</div></p>";
+    }
     if (!empty($sum_dame)) {
-        echo "<p>合計ダメージ：".$sum_dame."</p>";
+        echo "<p><div>合計ダメージ：".$sum_dame."</div></p>";
     }
     ?>
     <br />
@@ -72,12 +75,12 @@
 
         // セレクトボックスを新規作成
         var makeHtmlCode =
-            '<select name="atk' + numbers + '">' +
+            '&nbsp>> <select name="atk' + numbers + '">' +
                 '<option value="">選択</option>' +
                 '<?php foreach ($select_list as $key): ?>' +
                     '<option value="<?php echo $key ?>"><?php echo $key ?></option>' +
                 '<?php endforeach ?>' +
-            '</select> >> ';
+            '</select>';
 
         // 新しいセレクトボックスを作るための<div>タグを作成
         var div_element = document.createElement("div");
