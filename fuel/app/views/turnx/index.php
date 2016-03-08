@@ -30,7 +30,7 @@
     <!-- ▼Form▼ -->
     <?php echo Form::open(array('action'=>'turnx/calculation','method'=>'post','name'=>'myForm')) ?>
         <div id="selectBox">
-            <select name="atk1" onchange="addCheck()">
+            <select name="atk1">
                 <option value="">選択</option>
                 <?php foreach ($select_list as $key): ?>
                     <option value="<?php echo $key ?>" name="<?php echo $key ?>"><?php echo $key ?></option>
@@ -38,7 +38,11 @@
             </select>
             >>
         </div>
-        <input type="submit" value="計算">
+
+
+        <a class="btn btn-primary btn" onclick="addCheck()">追加</a>
+        <a class="btn btn-primary btn">削除</a>
+        <input class="btn btn-primary btn" type="submit" value="計算">
     <?php echo Form::close() ?>
     <!-- ▲Form▲ -->
 
@@ -69,7 +73,7 @@
 
         // セレクトボックスを新規作成
         var makeHtmlCode =
-            '<select name="atk' + numbers + '" onchange="addCheck();">' +
+            '<select name="atk' + numbers + '">' +
                 '<option value="">選択</option>' +
                 '<?php foreach ($select_list as $key): ?>' +
                     '<option value="<?php echo $key ?>"><?php echo $key ?></option>' +
