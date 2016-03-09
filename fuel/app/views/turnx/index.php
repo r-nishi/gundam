@@ -30,14 +30,29 @@
 
     <p>コンボ計算</p>
     <!-- ▼Form▼ -->
+    <?php $keep = 0 ?>
     <?php echo Form::open(array('action'=>'turnx/calculation','method'=>'post','name'=>'myForm')) ?>
         <div id="selectBox" style="display:flex; padding-bottom:10px;">
-            <select name="atk1">
-                <option value="">選択</option>
-                <?php foreach ($select_list as $key): ?>
-                    <option value="<?php echo $key ?>" name="<?php echo $key ?>"><?php echo $key ?></option>
-                <?php endforeach ?>
-            </select>
+            <?php for($i = 1; $atk_cnt >= $i; $i++): ?>
+                <?php if($i > 1): ?>
+                    &nbsp>>&nbsp
+                <?php endif ?>
+
+                <!-- ▼1つのセレクトボックス▼ -->
+                <select name="atk<?php echo $i ?>">
+                    <option value="">選択</option>
+                    <?php foreach($select_list as $value): ?>
+                        <?php if(!empty($sum_name) && $value == $sum_name[$keep]): ?>
+                            <option value="<?php echo $value ?>" name="<?php echo $value ?>" selected><?php echo $value ?></option>
+                        <?php else: ?>
+                            <option value="<?php echo $value ?>" name="<?php echo $value ?>"><?php echo $value ?></option>
+                        <?php endif ?>
+                    <?php endforeach; ?>
+                </select>
+                <!-- ▲1つのセレクトボックス▲ -->
+
+                <?php $keep++ ?>
+            <?php endfor ?>
         </div>
 
         <a class="btn btn-primary btn" onclick="addCheck()">追加</a>
@@ -48,7 +63,16 @@
 
     <?php
     if (!empty($sum_name)) {
-        echo "<p><div>".$sum_name."</div></p>";
+        $cnt = count($sum_name);
+        echo "<p><div>";
+        foreach($sum_name as $value){
+            $cnt--;
+            echo $value;
+            if($cnt > 0){
+                echo ">>";
+            }
+        }
+        echo "</p></div>";
     }
     if (!empty($sum_dame)) {
         echo "<p><div>合計ダメージ：".$sum_dame."</div></p>";
@@ -57,7 +81,15 @@
     <br />
     <p><a class="btn btn-primary btn-lg" href="../top/index">TOPに戻る</a></p>
 
-    <div hidden id="hidden">1</div>
+    <div hidden id="hidden">
+        <?php
+        if(!empty($atk_cnt)) {
+            echo $atk_cnt;
+        } else {
+            echo "1";
+        }
+        ?>
+    </div>
 
 </div>
 <footer>

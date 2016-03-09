@@ -53,7 +53,7 @@ class Controller_Turnx extends Controller
 	 * @access  public
 	 * @return  Response
 	 */
-	public function action_index($sum_dame = null,$sum_name = null)
+	public function action_index($sum_dame = null,$sum_name = array(),$atk_cnt = 1)
 	{
         $this->action_turnx();
 
@@ -65,13 +65,13 @@ class Controller_Turnx extends Controller
 
         $view = View::forge('turnx/index');
         $view->set('select_list',$select_list);
+        $view->set('atk_cnt',$atk_cnt);
+        $view->set('sum_name',$sum_name);
 
         if(!empty($sum_dame)){
             $view->set('sum_dame',$sum_dame);
         }
-        if(!empty($sum_name)){
-            $view->set('sum_name',$sum_name);
-        }
+
         return Response::forge($view);
 	}
 
@@ -86,8 +86,9 @@ class Controller_Turnx extends Controller
         $sum_scal = 0; // 累計補正値
         $sum_down = 0; // 累計ダウン値
         $down_flg = 0; // ダウン値用フラグ
+        $atk_cnt  = 0; // 攻撃回数
 
-        $sum_name = ""; // 使用コンボ
+        $sum_name = array(); // 使用コンボ
 
         // POSTで受け取る
         $data = Input::post();
@@ -99,6 +100,8 @@ class Controller_Turnx extends Controller
 
         // 受け取ったPOSTを空になるまで回す
         foreach($data as $value){
+
+            $atk_cnt++; // 攻撃回数
 
             // 無効な値が入ってきたらループを止める
             if(empty($value)){
@@ -129,15 +132,15 @@ class Controller_Turnx extends Controller
                     }
                 }
             }
-            $sum_name .= $value;
+            $sum_name[] = $value;
 
             // ダウン値確認
             if ($down_flg > 0){
             	break;
             }
-            $sum_name .= ">>";
+
         }
-        return $this->action_index($sum_dame,$sum_name);
+        return $this->action_index($sum_dame,$sum_name,$atk_cnt);
     }
 
 	/**
