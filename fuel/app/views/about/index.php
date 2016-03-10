@@ -46,7 +46,7 @@
     下記Twitter垢までお気軽にご連絡ください<br>
     https://twitter.com/Ryu24P<br>
     <br>
-    <p><a class="btn btn-primary btn-lg" href="../top/index">TOPに戻る</a></p>
+    <p><a class="btn btn-primary btn-lg" href="<?php echo URL ?>/top/index">TOPに戻る</a></p>
 </div>
 <footer>
 </footer>
