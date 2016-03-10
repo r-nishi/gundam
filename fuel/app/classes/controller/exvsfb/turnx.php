@@ -73,7 +73,6 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
                     } else {
                         // 累計補正値が適用された単発ダメージを計算し合計ダメージに加算する
                         $sum_dame += $value2['damage'] * (1 - $sum_scal);
-                        $sum_dame = ceil($sum_dame); //小数点以下を切り上げる
                     }
                     $sum_scal += $decimal_fraction; // 単発補正値を累計補正値に加算する
 
@@ -92,6 +91,9 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
             }
 
         }
+        // 小数点以下を切り上げる
+        $sum_dame = ceil($sum_dame);
+
         return $this->action_index($sum_dame,$sum_name,$atk_cnt);
     }
 
