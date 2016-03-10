@@ -24,8 +24,8 @@
 </header>
 <div class="container">
     <hr/>
-    <p><a class="btn btn-primary btn-lg" href="../turnx/index">ターンX</a></p>
-    <p><a class="btn btn-primary btn-lg" href="../about/index">about</a></p>
+    <p><a href="<?php echo URL_EXVSFB ?>/turnx/index"><?php echo Asset::img('turnx.png') ?></a></p>
+    <p><a class="btn btn-primary btn-lg" href="<?php echo URL ?>/about/index">about</a></p>
 </div>
 <footer>
 </footer>

@@ -1,18 +1,5 @@
 <?php
 /**
- * Fuel is a fast, lightweight, community driven PHP5 framework.
- *
- * @package    Fuel
- * @version    1.7
- * @author     r-nishi
- * @license    MIT License
- * @copyright  2010 - 2015 Fuel Development Team
- * @link       http://fuelphp.com
- */
-
-/**
- * The Welcome Controller.
- *
  * @package  app
  * @extends  Controller
  */
@@ -26,6 +13,9 @@ class Controller_Top extends Controller
 	 */
 	public function action_index()
 	{
+        // グローバル定数設定
+        Config::load('constant',true);
+
 		$view = View::forge('top/index');
 		return Response::forge($view);
 	}
