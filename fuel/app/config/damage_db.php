@@ -19,9 +19,4 @@ return array(
         "down_point"     => 2.7,
         "damage_scaling" => 40
     ),
-    "NNN" => array(
-        "damage"         => 0,
-        "down_point"     => 0,
-        "damage_scaling" => 0
-    ),
 );
