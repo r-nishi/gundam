@@ -61,28 +61,79 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
             }
 
             // ダメージデータ表を回す
-            foreach ($this->damage_db as $key => $value2) {
+            foreach ($this->damage_db as $key => $value2) :
                 if ($value == $key) {
 
-                    $decimal_fraction = 0; // 少数表記された単発補正値を入れる
+                    $array_count = count($value2,COUNT_RECURSIVE); // 連続攻撃か判定
 
-                    $decimal_fraction = $value2['damage_scaling'] / 100; // 少数表記に 0.3など
+                    if ($array_count == 3) {
+                        // 単発処理
 
-                    if ($sum_dame == 0) {
-                        $sum_dame = $value2['damage'];
+                        $decimal_fraction = 0; // 少数表記された単発補正値を初期化
+                        $tmp_dame = 0; // 一時的なダメ
+
+                        $decimal_fraction = $value2['damage_scaling'] / 100; // 少数表記に 0.3など
+
+                        if ($sum_dame == 0) {
+                            echo $sum_dame = $value2['damage'];
+                        } else {
+                            // 累計補正値が適用された単発ダメージを計算
+                            $tmp_dame = $value2['damage'] * (1 - $sum_scal);
+
+                            // 小数点切り上げ
+                            echo "+";
+                            echo $tmp_dame = ceil($tmp_dame);
+
+                            // 合算する
+                            $sum_dame += $tmp_dame;
+                        }
+
+                        // ダウン値計算
+                        $sum_down += $value2['down_point'];
+                        if ($sum_down >= 5) {
+                            $down_flg = 1;
+                        } else {
+                            // 単発補正値を累計補正値に加算する
+                            $sum_scal += $decimal_fraction;
+                        }
                     } else {
-                        // 累計補正値が適用された単発ダメージを計算し合計ダメージに加算する
-                        $sum_dame += $value2['damage'] * (1 - $sum_scal);
-                    }
-                    $sum_scal += $decimal_fraction; // 単発補正値を累計補正値に加算する
+                        // 連続処理
 
-                    // ダウン値計算
-                    $sum_down += $value2['down_point'];
-                    if ($sum_down >= 5){
-                        $down_flg = 1;
+                        foreach($value2 as $key => $value3) :
+
+                            $decimal_fraction = 0; // 少数表記された単発補正値を入れる
+                            $tmp_dame = 0; // 一時的なダメ
+
+                            $decimal_fraction = $value3['damage_scaling'] / 100; // 少数表記に 0.3など
+
+                            if ($sum_dame == 0) {
+                                echo $sum_dame = $value3['damage'];
+                            } else {
+                                // 累計補正値が適用された単発ダメージを計算
+                                $tmp_dame = $value3['damage'] * (1 - $sum_scal);
+
+                                // 小数点切り上げ
+                                echo "+";
+                                echo $tmp_dame = ceil($tmp_dame);
+
+                                // 合算する
+                                $sum_dame += $tmp_dame;
+                            }
+
+                            // ダウン値計算
+                            $sum_down += $value3['down_point'];
+                            if ($sum_down >= 5) {
+                                $down_flg = 1;
+                                break;
+                            } else {
+                                // 単発補正値を累計補正値に加算する
+                                $sum_scal += $decimal_fraction;
+                            }
+                        endforeach;
                     }
                 }
-            }
+            endforeach;
+
             $sum_name[] = $value;
 
             // ダウン値確認
@@ -92,7 +143,11 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
 
         }
         // 小数点以下を切り上げる
-        $sum_dame = ceil($sum_dame);
+        // $sum_dame = ceil($sum_dame);
+
+        echo "<br>補正率-";
+        echo $sum_scal * 100;
+        echo "%";
 
         return $this->action_index($sum_dame,$sum_name,$atk_cnt);
     }
