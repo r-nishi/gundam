@@ -64,7 +64,7 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
             foreach ($this->damage_db as $key => $value2) :
                 if ($value == $key) {
 
-                    $array_count = count($value2,COUNT_RECURSIVE); // 連続攻撃か判定
+                    $array_count = count($value2, COUNT_RECURSIVE); // 連続攻撃か判定
 
                     if ($array_count == 3) {
                         // 単発処理
@@ -82,7 +82,9 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
 
                             // 小数点切り上げ
                             echo "+";
-                            echo $tmp_dame = ceil($tmp_dame);
+                            echo $tmp_dame;
+                            $tmp_dame = ceil($tmp_dame);
+                            echo "(".$tmp_dame.")";
 
                             // 合算する
                             $sum_dame += $tmp_dame;
@@ -99,7 +101,7 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
                     } else {
                         // 連続処理
 
-                        foreach($value2 as $key => $value3) :
+                        foreach ($value2 as $key => $value3) :
 
                             $decimal_fraction = 0; // 少数表記された単発補正値を入れる
                             $tmp_dame = 0; // 一時的なダメ
@@ -107,14 +109,66 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
                             $decimal_fraction = $value3['damage_scaling'] / 100; // 少数表記に 0.3など
 
                             if ($sum_dame == 0) {
+                                // 最初の一回目の攻撃
                                 echo $sum_dame = $value3['damage'];
+
+                                if (@$value3['same_flg'] == 1) {
+                                    // ダウン値計算
+                                    $sum_down += $value3['down_point'];
+                                    continue;
+                                }
+
+                            } elseif (@$value3['same_flg'] == 1) {
+                                // 同時ヒット時の攻撃
+
+                                // 累計補正値が適用された単発ダメージを計算
+                                $tmp_dame = $value3['damage'] * (1 - $sum_scal);
+
+                                echo "+";
+                                echo $tmp_dame;
+
+                                // 小数点切り上げ
+                                $tmp_dame = ceil($tmp_dame);
+
+                                echo "(" . $tmp_dame . ")";
+
+                                // ダメージを合算する
+                                $sum_dame += $tmp_dame;
+
+                                // ダウン値計算
+                                $sum_down += $value3['down_point'];
+
+                                continue;
+
+                            } elseif (@$value3['same_flg'] == 2) {
+                                // 同時ヒット時の攻撃(2本目)
+
+                                // 累計補正値が適用された単発ダメージを計算
+                                $tmp_dame = $value3['damage'] * (1 - $sum_scal);
+
+                                echo "+";
+                                echo $tmp_dame;
+
+                                // 小数点切り上げ
+                                $tmp_dame = ceil($tmp_dame);
+
+                                echo "(" . $tmp_dame . ")";
+
+                                // ダメージを合算する
+                                $sum_dame += $tmp_dame;
+
+                                // 単発補正値を2倍する
+                                $decimal_fraction = $decimal_fraction * 2;
+
                             } else {
                                 // 累計補正値が適用された単発ダメージを計算
                                 $tmp_dame = $value3['damage'] * (1 - $sum_scal);
 
                                 // 小数点切り上げ
                                 echo "+";
-                                echo $tmp_dame = ceil($tmp_dame);
+                                echo $tmp_dame;
+                                $tmp_dame = ceil($tmp_dame);
+                                echo "(" . $tmp_dame . ")";
 
                                 // 合算する
                                 $sum_dame += $tmp_dame;
@@ -125,10 +179,9 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
                             if ($sum_down >= 5) {
                                 $down_flg = 1;
                                 break;
-                            } else {
-                                // 単発補正値を累計補正値に加算する
-                                $sum_scal += $decimal_fraction;
                             }
+                            // 単発補正値を累計補正値に加算する
+                            $sum_scal += $decimal_fraction;
                         endforeach;
                     }
                 }
@@ -145,8 +198,7 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
         // 小数点以下を切り上げる
         // $sum_dame = ceil($sum_dame);
 
-        echo "<br>補正率-";
-        echo $sum_scal * 100;
+        echo "<br>補正率-".$sum_scal * 100;
         echo "%";
 
         return $this->action_index($sum_dame,$sum_name,$atk_cnt);

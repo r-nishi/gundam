@@ -10,9 +10,18 @@ return array(
         "damage_scaling" => 30,  // 補正値
     ),
     "CS" => array(
-        "damage"         => 130,
-        "down_point"     => 6.0,
-        "damage_scaling" => 40
+        "1" => array(
+            "damage"         => 65,
+            "down_point"     => 3.0,
+            "damage_scaling" => 20,
+            "same_flg"       => 1    // 同時ヒット
+        ),
+        "2" => array(
+            "damage"         => 65,
+            "down_point"     => 3.0,
+            "damage_scaling" => 20,
+            "same_flg"       => 2    // 同時ヒット
+        )
     ),
     "サブ" => array(
         "damage"         => 111,
@@ -227,7 +236,7 @@ return array(
         "N3" => array(
             "damage"         => 30,
             "down_point"     => 0.2,
-            "damage_scaling" => 5
+            "damage_scaling" => 4
         ),
         "N4" => array(
             "damage"         => 30,
@@ -280,7 +289,7 @@ return array(
     "BD格" => array(
         "damage"         => 70,
         "down_point"     => 1.7,
-        "damage_scaling" => 20,
+        "damage_scaling" => 20
     ),
     "BD格N" => array(
         "BD格" => array(
