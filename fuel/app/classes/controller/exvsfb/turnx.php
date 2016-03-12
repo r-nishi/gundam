@@ -72,7 +72,7 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
             $sum_name[] = $value; // セレクトリスト維持の為に何を渡したか記憶
 
             // ダウン値確認
-            if ($sum_down_point >= 5){
+            if ($sum_down_point > 4.9){
                 break;
             }
 
@@ -124,7 +124,7 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
 
             // ダウン値計算
             $累計ダウン値 += $value['down_point'];
-            if ($累計ダウン値 >= 5) {
+            if ($累計ダウン値 > 4.9) {
                 break;
             }
         endforeach;
