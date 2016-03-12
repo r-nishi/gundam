@@ -5,28 +5,32 @@
  */
 return array(
     "メイン" => array(
+        "1" => array(
         "damage"         => 75,  // ダメージ
         "down_point"     => 2.0, // ダウン値
         "damage_scaling" => 30,  // 補正値
+        ),
     ),
     "CS" => array(
         "1" => array(
             "damage"         => 65,
             "down_point"     => 3.0,
             "damage_scaling" => 20,
-            "same_flg"       => 1    // 同時ヒット
+            "same_hit"       => 1    // 同時ヒット
         ),
         "2" => array(
             "damage"         => 65,
             "down_point"     => 3.0,
             "damage_scaling" => 20,
-            "same_flg"       => 2    // 同時ヒット
+            "same_hit"       => 2    // 同時ヒット
         )
     ),
     "サブ" => array(
+        "1" => array(
         "damage"         => 111,
         "down_point"     => 2.7,
-        "damage_scaling" => 40
+        "damage_scaling" => 40,
+        ),
     ),
     "N" => array(
         "N1" => array(
@@ -287,9 +291,11 @@ return array(
         ),
     ),
     "BD格" => array(
+        "1" => array(
         "damage"         => 70,
         "down_point"     => 1.7,
-        "damage_scaling" => 20
+        "damage_scaling" => 20,
+        ),
     ),
     "BD格N" => array(
         "BD格" => array(
@@ -319,14 +325,18 @@ return array(
         ),
     ),
     "後" => array(
-        "damage"         => 20,
-        "down_point"     => 0.1,
-        "damage_scaling" => 10
+        "1" => array(
+            "damage"         => 20,
+            "down_point"     => 0.1,
+            "damage_scaling" => 10,
+        ),
     ),
     "特格掴み" => array(
-        "damage"         => 30,
-        "down_point"     => 0.3,
-        "damage_scaling" => 10
+        "掴み" => array(
+            "damage"         => 30,
+            "down_point"     => 0.3,
+            "damage_scaling" => 10
+        )
     ),
     "特格掴み爆発" => array(
         "掴み" => array(

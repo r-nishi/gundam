@@ -31,7 +31,7 @@
     <p>コンボ計算</p>
     <!-- ▼Form▼ -->
     <?php $keep = 0 ?>
-    <?php echo Form::open(array('action'=> URL_EXVSFB.'/turnx/calculation','method'=>'post','name'=>'myForm')) ?>
+    <?php echo Form::open(array('action'=> URL_EXVSFB.'/turnx/calculation2','method'=>'post','name'=>'myForm')) ?>
         <div id="selectBox" style="display:flex; padding-bottom:10px;">
             <?php for($i = 1; $atk_cnt >= $i; $i++): ?>
                 <?php if($i > 1): ?>
