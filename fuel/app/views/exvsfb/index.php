@@ -31,9 +31,6 @@
     <h3>EXVSFB</h3>
     <p>コスト3000</p>
     <p><a href="<?php echo URL_EXVSFB ?>/turnx/index"><?php echo Asset::img('turnx.png') ?></a></p>
-    <hr>
-    <h3>EXVSMBON</h3>
-    <p>コスト3000</p>
 </div>
 <footer>
 </footer>

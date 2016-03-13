@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>ガンダムコンボサイト</title>
+    <title>EXVSコンボサイト</title>
     <?php echo Asset::css('bootstrap.css'); ?>
     <style>
         a{
@@ -18,19 +18,22 @@
 <body>
 <header>
     <div class="container">
-        <h1>ガンダムコンボサイト</h1>
-        <p>※開発途中です</p>
+        <h1>EXVSコンボサイト</h1>
     </div>
 </header>
+<hr>
 <div class="container">
-    <hr/>
+    <a class="btn btn-primary" href="<?php echo URL ?>/top/index">TOP</a>
+    <a class="btn btn-primary" href="<?php echo URL ?>/exvsfb/top">EXVSFB</a>
+    <a class="btn btn-primary" href="<?php echo URL ?>/exvsmbon/top">EXVSMBON</a>
+    <a class="btn btn-primary" href="<?php echo URL ?>/about/index">ABOUT</a>
 
     <h3>■概要</h3>
-    サイト名：ガンダムコンボサイト（暫定）<br>
+    サイト名：EXVSコンボサイト（暫定）<br>
     管理人：24P<br>
     URL：http://hisuichan.com/gundam/public/top<br>
     <br>
-    当サイトは、EXVSFB,EXVSMB,EXVSMBONの各機体のコンボダメージを計算するサイトです<br>
+    当サイトは、EXVSFB,EXVSMBONの各機体のコンボダメージを計算するサイトです<br>
     みなさんと共に機体の研究ができたら幸いです<br>
     <br>
     <h3>■免責</h3>
@@ -46,7 +49,7 @@
     下記Twitter垢までお気軽にご連絡ください<br>
     https://twitter.com/Ryu24P<br>
     <br>
-    <p><a class="btn btn-primary btn-lg" href="<?php echo URL ?>/top/index">TOPに戻る</a></p>
+    <p><a class="btn btn-primary" href="<?php echo URL ?>/top/index">TOPに戻る</a></p>
 </div>
 <footer>
 </footer>

@@ -17,7 +17,7 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
             $select_list[$key] = $key;
         }
 
-        $view = View::forge('turnx/index');
+        $view = View::forge('exvsfb/turnx/index');
         $view->set('select_list',$select_list);
         $view->set('atk_cnt',$atk_cnt);
         $view->set('sum_name',$sum_name);
