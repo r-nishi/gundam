@@ -1,3 +1,5 @@
-/.project
-/.settings
-/.idea
+.project
+.settings
+.idea
+.DS_Store
+logs
