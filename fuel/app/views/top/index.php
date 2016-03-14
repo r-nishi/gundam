@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>ガンダムコンボサイト</title>
+    <title>EXVSコンボサイト</title>
     <?php echo Asset::css('bootstrap.css'); ?>
     <style>
         a{
@@ -18,14 +18,22 @@
 <body>
 <header>
     <div class="container">
-        <h1>ガンダムコンボサイト</h1>
-        <p>※開発途中です</p>
+        <h1>EXVSコンボサイト</h1>
     </div>
 </header>
+<hr/>
 <div class="container">
-    <hr/>
+    <a class="btn btn-primary" href="<?php echo URL ?>/top/index">TOP</a>
+    <a class="btn btn-primary" href="<?php echo URL ?>/exvsfb/top/index">EXVSFB</a>
+    <a class="btn btn-primary" href="<?php echo URL ?>/exvsmbon/top/index">EXVSMBON</a>
+    <a class="btn btn-primary" href="<?php echo URL ?>/about/index">ABOUT</a>
+
+    <h3>EXVSFB</h3>
+    <p>コスト3000</p>
     <p><a href="<?php echo URL_EXVSFB ?>/turnx/index"><?php echo Asset::img('turnx.png') ?></a></p>
-    <p><a class="btn btn-primary btn-lg" href="<?php echo URL ?>/about/index">about</a></p>
+    <hr>
+    <h3>EXVSMBON</h3>
+    <p>コスト3000</p>
 </div>
 <footer>
 </footer>

@@ -17,7 +17,7 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
             $select_list[$key] = $key;
         }
 
-        $view = View::forge('turnx/index');
+        $view = View::forge('exvsfb/turnx/index');
         $view->set('select_list',$select_list);
         $view->set('atk_cnt',$atk_cnt);
         $view->set('sum_name',$sum_name);
@@ -109,6 +109,12 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
                     continue;
                 }
             } else {
+
+                // 最低補正率は−10%
+                if($累計補正率 < 0.1){
+                    $累計補正率 = 0.1;
+                }
+
                 $累計威力 = ceil($累計威力 + $単発威力 * $累計補正率);
 
                 if (!empty($value['same_hit']) && $value['same_hit'] == 1) {
