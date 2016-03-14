@@ -24,16 +24,18 @@
 <hr>
 <div class="container">
     <a class="btn btn-primary" href="<?php echo URL ?>/top/index">TOP</a>
-    <a class="btn btn-primary" href="<?php echo URL ?>/exvsfb/top">EXVSFB</a>
-    <a class="btn btn-primary" href="<?php echo URL ?>/exvsmbon/top">EXVSMBON</a>
+    <a class="btn btn-primary" href="<?php echo URL ?>/exvsfb/top/index">EXVSFB</a>
+    <a class="btn btn-primary" href="<?php echo URL ?>/exvsmbon/top/index">EXVSMBON</a>
     <a class="btn btn-primary" href="<?php echo URL ?>/about/index">ABOUT</a>
 
     <h3>■概要</h3>
     サイト名：EXVSコンボサイト（暫定）<br>
     管理人：24P<br>
     URL：http://hisuichan.com/gundam/public/top<br>
+    GitHub：https://github.com/r-nishi/gundam.git<br>
     <br>
     当サイトは、EXVSFB,EXVSMBONの各機体のコンボダメージを計算するサイトです<br>
+    GitHubにてソースコードを公開しているので追加機体などありましたら気軽にプルリクエストしてください<br>
     みなさんと共に機体の研究ができたら幸いです<br>
     <br>
     <h3>■免責</h3>
