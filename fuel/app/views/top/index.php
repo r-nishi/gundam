@@ -2,6 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
+    <meta name="google-site-verification" content="kq86V_frGPX2qFAuJ6hCRSOFl_k6kZLqcLvzbu03n-g" />
     <title>EXVSコンボサイト</title>
     <?php echo Asset::css('bootstrap.css'); ?>
     <style>
