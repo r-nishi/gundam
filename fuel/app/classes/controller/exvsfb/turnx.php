@@ -109,6 +109,12 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
                     continue;
                 }
             } else {
+
+                // 最低補正率は−10%
+                if($累計補正率 < 0.1){
+                    $累計補正率 = 0.1;
+                }
+
                 $累計威力 = ceil($累計威力 + $単発威力 * $累計補正率);
 
                 if (!empty($value['same_hit']) && $value['same_hit'] == 1) {
