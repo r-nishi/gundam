@@ -8,13 +8,17 @@
  */
 class Controller_Exvsfb extends Controller
 {
-    protected $damage_db; // ダメージデータ表
+    protected $damage_db;
+    protected $awakening_db; // 覚醒補正率表
 
-    public function before(){
+    public function before()
+    {
         // ▼定義ファイル読み込み処理▼
-
         // ダメージ表読み込み
-        $this->damage_db = Config::load('damage_db');
+        $this->damage_db = Config::load('turnx/damage_db');
+
+        // 覚醒補正率表読込
+        $this->awakening_db = Config::load('awakening_db');
 
         // グローバル定数設定
         Config::load('constant',true);

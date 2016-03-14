@@ -25,17 +25,27 @@
 <div class="container">
     <a class="btn btn-primary" href="<?php echo URL ?>/top/index">TOP</a>
     <a class="btn btn-primary" href="<?php echo URL ?>/exvsfb/top">EXVSFB</a>
-    <a class="btn btn-primary" href="<?php echo URL ?>/exvsmb/top">EXVSMBON</a>
+    <a class="btn btn-primary" href="<?php echo URL ?>/exvsmbon/top">EXVSMBON</a>
     <a class="btn btn-primary" href="<?php echo URL ?>/about/index">ABOUT</a>
 
     <h3>■ターンX</h3>
     <p><?php echo Asset::img('turnx.png') ?></p>
     <br>
+    <hr>
 
-    <p>コンボ計算</p>
+    <h3>■コンボ計算</h3>
     <!-- ▼Form▼ -->
     <?php $keep = 0 ?>
     <?php echo Form::open(array('action'=> URL_EXVSFB.'/turnx/calculation','method'=>'post','name'=>'myForm')) ?>
+        覚醒選択<br>
+        <select name="awakening">
+            <option value="" selected>覚醒ナシ</option>
+            <option value="assault">A覚醒</option>
+            <option value="blast">B覚醒</option>
+        </select>
+        <br>
+        <br>
+        コンボ選択
         <div id="selectBox" style="display:flex; padding-bottom:10px;">
             <?php for($i = 1; $atk_cnt >= $i; $i++): ?>
                 <?php if($i > 1): ?>
@@ -83,6 +93,7 @@
     }
     ?>
     <br />
+    <hr>
     <p><a class="btn btn-primary" href="<?php echo URL ?>/top/index">TOPに戻る</a></p>
 
     <div hidden id="hidden">
