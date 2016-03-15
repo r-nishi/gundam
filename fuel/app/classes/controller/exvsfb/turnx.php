@@ -38,8 +38,8 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
         $atk_cnt  = 0; // 攻撃回数
         $sum_scal = 1; // 累計補正値
         $sum_down_point = 0; // 累計ダウン値
-        $awakening = 1; // 覚醒補正値
 
+        $awakening = array(); // 覚醒種類と覚醒補正値
         $tmp_data = array(); // 一時的にダメージ値を保存
         $sum_name = array(); // 使用コンボ*現在めんどいのでシカト無視
 
@@ -82,8 +82,7 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
 
             $sum_name[] = $value; // セレクトリスト維持の為に何を渡したか記憶
 
-            // ダウン値確認
-            if ($sum_down_point > 4.9){
+            if ($sum_down_point >= 5) {
                 break;
             }
 
@@ -103,7 +102,15 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
         $累計威力 = $sum_dame;
         $累計補正率 = $sum_scal;
         $累計ダウン値 = $sum_down_point;
-        $覚醒補正率 = $awakening;
+        $覚醒種類 = ""; // もし覚醒していたら値が入る
+        $覚醒補正率 = 1;
+
+        if (!empty($awakening)) {
+            foreach ($awakening as $key => $value) {
+                $覚醒種類 = $key;
+                $覚醒補正率 = $value;
+            }
+        }
 
         $return_data = array();
 
@@ -117,7 +124,7 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
 
             if($累計威力 == 0){
                 // 覚醒補正率計算
-                if ($覚醒補正率 > 1) {
+                if (!empty($覚醒種類)) {
                     $累計威力 = ceil($単発威力 * $覚醒補正率);
                 } else {
                     $累計威力 = $単発威力;
@@ -133,12 +140,7 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
                     $累計補正率 = 0.1;
                 }
 
-                $補正適応後単発威力 = ceil($単発威力 * $累計補正率);
-
-                // 覚醒補正計算
-                if ($覚醒補正率 > 1) {
-                    $補正適応後単発威力 = ceil($補正適応後単発威力 * $覚醒補正率);
-                }
+                $補正適応後単発威力 = ceil($単発威力 * $累計補正率 * $覚醒補正率);
                 $累計威力 += $補正適応後単発威力;
 
                 // 同時ヒット時計算
@@ -148,14 +150,21 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
                 if (!empty($value['same_hit']) && $value['same_hit'] == 2) {
                     // 1回分多い
                     $累計補正率 -= $単発補正率;
-                    $累計ダウン値 += $value['down_point'];
+
+                    // ダウン値計算
+                    $累計ダウン値 = $this->get_down_point($覚醒種類,$累計ダウン値,$value['down_point']);
+
                 }
             }
             $累計補正率 -= $単発補正率;
 
             // ダウン値計算
-            $累計ダウン値 += $value['down_point'];
-            if ($累計ダウン値 > 4.9) {
+            $累計ダウン値 = $this->get_down_point($覚醒種類,$累計ダウン値,$value['down_point']);
+
+            // echo $累計ダウン値."<br>"; // debug用コード
+            $累計ダウン値 = (string)$累計ダウン値; // string型にキャストする(PHPは浮動小数点数の計算が苦手)
+
+            if ($累計ダウン値 >= 5) {
                 break;
             }
         endforeach;
@@ -172,18 +181,40 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
      */
     private function get_awakening_db($para)
     {
+        $return_data = array();
+
         // ダメージ表読み込み
         foreach($this->awakening_db as $key => $value){
             if("ターンX" == $key){
                 foreach($value as $key2 => $value3){
                     if($para == $key2){
-                        $return = $value3;
+                        $return_data[$key2] = $value3;
                     }
                 }
             }
         }
 
-        return $return;
+        return $return_data;
+    }
+
+    /**
+     * ダウン値計算
+     */
+    private function get_down_point($awakening,$sum_down,$down_point)
+    {
+        /* TXでの計算結果だけだが、おそらく覚醒中のダウン値は切り上げではなく丸めると考えられる */
+
+        if ((!empty($awakening))) {
+            // 小数点第３位を丸める
+            $sum_down += round($down_point * 0.9,2);
+
+            // 小数点第３位を切り上げ(一応処理を残しておく)
+            // $tmp_down_point = $value['down_point'] * 0.9;
+            // $累計ダウン値 += ceil($tmp_down_point * 100) / 100;
+        } else {
+            $sum_down += $down_point;
+        }
+        return $sum_down;
     }
 
     /**
