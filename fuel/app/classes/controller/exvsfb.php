@@ -14,8 +14,9 @@ class Controller_Exvsfb extends Controller
     public function before()
     {
         // ▼定義ファイル読み込み処理▼
-        // ダメージ表読み込み
-        $this->damage_db = Config::load('turnx/damage_db');
+
+        // ダメージ表読込
+        $this->damage_db = Config::load('ms/exvsfb/turnx/damage_db');
 
         // 覚醒補正率表読込
         $this->awakening_db = Config::load('awakening_db');
