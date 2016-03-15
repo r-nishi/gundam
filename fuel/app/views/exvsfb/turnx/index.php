@@ -39,9 +39,17 @@
     <?php echo Form::open(array('action'=> URL_EXVSFB.'/turnx/calculation','method'=>'post','name'=>'myForm')) ?>
         覚醒選択<br>
         <select name="awakening">
-            <option value="" selected>覚醒ナシ</option>
-            <option value="assault">A覚醒</option>
-            <option value="blast">B覚醒</option>
+            <option value="">覚醒ナシ</option>
+            <?php if (!empty($awakening) && $awakening == "assault") : ?>
+                <option value="assault" selected>A覚醒</option>
+            <?php else: ?>
+                <option value="assault">A覚醒</option>
+            <?php endif ?>
+            <?php if (!empty($awakening) && $awakening == "blast") : ?>
+                <option value="blast" selected>B覚醒</option>
+            <?php else: ?>
+                <option value="blast">B覚醒</option>
+            <?php endif ?>
         </select>
         <br>
         <br>
@@ -94,8 +102,6 @@
     ?>
     <br />
     <hr>
-    <p><a class="btn btn-primary" href="<?php echo URL ?>/top/index">TOPに戻る</a></p>
-
     <div hidden id="hidden">
         <?php
         if(!empty($atk_cnt)) {
@@ -106,6 +112,10 @@
         ?>
     </div>
 
+    <h3>■メモ</h3>
+    ・A覚醒時「メイン>>メイン>>メイン」は計算値189だが、実測値は190<br>
+    ・A覚醒時「メイン>>メイン→CS」は計算値217だが、実測値は218<br>
+    <hr>
 </div>
 <footer>
 </footer>

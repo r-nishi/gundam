@@ -9,7 +9,7 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
 	 * @access  public
 	 * @return  Response
 	 */
-	public function action_index($sum_dame = null,$sum_name = array(),$atk_cnt = 1)
+	public function action_index($sum_dame = null,$sum_name = array(),$atk_cnt = 1,$awakening = null)
 	{
         // セレクトボックス作成
         $select_list = array();
@@ -22,8 +22,11 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
         $view->set('atk_cnt',$atk_cnt);
         $view->set('sum_name',$sum_name);
 
-        if(!empty($sum_dame)){
+        if (!empty($sum_dame)) {
             $view->set('sum_dame',$sum_dame);
+        }
+        if (!empty($awakening)) {
+            $view->set('awakening',$awakening);
         }
 
         return Response::forge($view);
@@ -87,7 +90,7 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
             }
 
         endforeach;
-        return $this->action_index($sum_dame,$sum_name,$atk_cnt);
+        return $this->action_index($sum_dame,$sum_name,$atk_cnt,$data['awakening']);
     }
 
     /**
