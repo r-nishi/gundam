@@ -25,17 +25,35 @@
 <div class="container">
     <a class="btn btn-primary" href="<?php echo URL ?>/top/index">TOP</a>
     <a class="btn btn-primary" href="<?php echo URL ?>/exvsfb/top">EXVSFB</a>
-    <a class="btn btn-primary" href="<?php echo URL ?>/exvsmb/top">EXVSMBON</a>
+    <a class="btn btn-primary" href="<?php echo URL ?>/exvsmbon/top">EXVSMBON</a>
     <a class="btn btn-primary" href="<?php echo URL ?>/about/index">ABOUT</a>
 
     <h3>■ターンX</h3>
     <p><?php echo Asset::img('turnx.png') ?></p>
     <br>
+    <hr>
 
-    <p>コンボ計算</p>
+    <h3>■コンボ計算</h3>
     <!-- ▼Form▼ -->
     <?php $keep = 0 ?>
     <?php echo Form::open(array('action'=> URL_EXVSFB.'/turnx/calculation','method'=>'post','name'=>'myForm')) ?>
+        覚醒選択<br>
+        <select name="awakening">
+            <option value="">覚醒ナシ</option>
+            <?php if (!empty($awakening) && $awakening == "assault") : ?>
+                <option value="assault" selected>A覚醒</option>
+            <?php else: ?>
+                <option value="assault">A覚醒</option>
+            <?php endif ?>
+            <?php if (!empty($awakening) && $awakening == "blast") : ?>
+                <option value="blast" selected>B覚醒</option>
+            <?php else: ?>
+                <option value="blast">B覚醒</option>
+            <?php endif ?>
+        </select>
+        <br>
+        <br>
+        コンボ選択
         <div id="selectBox" style="display:flex; padding-bottom:10px;">
             <?php for($i = 1; $atk_cnt >= $i; $i++): ?>
                 <?php if($i > 1): ?>
@@ -83,8 +101,7 @@
     }
     ?>
     <br />
-    <p><a class="btn btn-primary" href="<?php echo URL ?>/top/index">TOPに戻る</a></p>
-
+    <hr>
     <div hidden id="hidden">
         <?php
         if(!empty($atk_cnt)) {
@@ -95,6 +112,10 @@
         ?>
     </div>
 
+    <h3>■メモ</h3>
+    ・A覚醒時「メイン>>メイン>>メイン」は計算値189だが、実測値は190<br>
+    ・A覚醒時「メイン>>メイン→CS」は計算値217だが、実測値は218<br>
+    <hr>
 </div>
 <footer>
 </footer>
