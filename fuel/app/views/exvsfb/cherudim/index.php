@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>EXVSコンボサイト</title>
+    <title><?php HP_NAME ?></title>
     <?php echo Asset::css('bootstrap.css') ?>
     <style>
         a{
@@ -18,7 +18,7 @@
 <body>
 <header>
     <div class="container">
-        <h1>EXVSコンボサイト</h1>
+        <h1><?php echo HP_NAME ?></h1>
     </div>
 </header>
 <hr>
@@ -28,8 +28,8 @@
     <a class="btn btn-primary" href="<?php echo URL ?>/exvsmbon/top">EXVSMBON</a>
     <a class="btn btn-primary" href="<?php echo URL ?>/about/index">ABOUT</a>
 
-    <h3>■ターンX</h3>
-    <p><?php echo Asset::img('ms/turnx.png') ?></p>
+    <h3>■<?php echo CHERUDIM ?></h3>
+    <p><?php echo Asset::img('ms/cherudim.png') ?></p>
     <br>
     <hr>
 

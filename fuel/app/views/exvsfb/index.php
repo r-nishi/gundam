@@ -18,7 +18,7 @@
 <body>
 <header>
     <div class="container">
-        <h1>EXVSコンボサイト</h1>
+        <h2><?php echo HP_NAME ?></h2>
     </div>
 </header>
 <hr/>
@@ -28,9 +28,21 @@
     <a class="btn btn-primary" href="<?php echo URL ?>/exvsmbon/top/index">EXVSMBON</a>
     <a class="btn btn-primary" href="<?php echo URL ?>/about/index">ABOUT</a>
 
-    <h3>EXVSFB</h3>
-    <p>コスト3000</p>
-    <p><a href="<?php echo URL_EXVSFB ?>/turnx/index"><?php echo Asset::img('turnx.png') ?></a></p>
+    <h3><?php echo EXVSFB ?></h3>
+    <p><?php echo COST_3000 ?></p>
+    <ul>
+        <li><?php echo N_GUNDAM ?></li>
+        <li><?php echo V2_GUNDAM ?></li>
+        <li><a href="<?php echo URL_EXVSFB ?>/turnx/index"><?php echo TURN_X ?></a></li>
+        <li><?php echo BANSHEE_NORN ?></li>
+    </ul>
+
+    <p><?php echo COST_2500 ?></p>
+    <ul>
+        <li><a href="<?php echo URL_EXVSFB ?>/cherudim/index"><?php echo CHERUDIM ?></a></li>
+    </ul>
+    <p><?php echo COST_2000 ?></p>
+    <p><?php echo COST_1000 ?></p>
 </div>
 <footer>
 </footer>

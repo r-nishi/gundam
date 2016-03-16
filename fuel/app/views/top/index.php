@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="google-site-verification" content="kq86V_frGPX2qFAuJ6hCRSOFl_k6kZLqcLvzbu03n-g" />
-    <title>EXVSコンボサイト</title>
+    <title><?php echo HP_NAME ?></title>
     <?php echo Asset::css('bootstrap.css'); ?>
     <style>
         a{
@@ -19,22 +19,40 @@
 <body>
 <header>
     <div class="container">
-        <h1>EXVSコンボサイト</h1>
+        <h1><?php echo HP_NAME ?></h1>
     </div>
 </header>
 <hr/>
 <div class="container">
-    <a class="btn btn-primary" href="<?php echo URL ?>/top/index">TOP</a>
-    <a class="btn btn-primary" href="<?php echo URL ?>/exvsfb/top/index">EXVSFB</a>
-    <a class="btn btn-primary" href="<?php echo URL ?>/exvsmbon/top/index">EXVSMBON</a>
-    <a class="btn btn-primary" href="<?php echo URL ?>/about/index">ABOUT</a>
+    <a class="btn btn-primary" href="<?php echo URL ?>/top/index"><?php echo TOP ?></a>
+    <a class="btn btn-primary" href="<?php echo URL ?>/exvsfb/top/index"><?php echo EXVSFB ?></a>
+    <a class="btn btn-primary" href="<?php echo URL ?>/exvsmbon/top/index"><?php echo EXVSMBON ?></a>
+    <a class="btn btn-primary" href="<?php echo URL ?>/about/index"><?php echo ABOUT ?></a>
+    <a class="btn btn-primary" href="<?php echo URL ?>/news/index"><?php echo NEWS ?></a>
 
-    <h3>EXVSFB</h3>
-    <p>コスト3000</p>
-    <p><a href="<?php echo URL_EXVSFB ?>/turnx/index"><?php echo Asset::img('turnx.png') ?></a></p>
+    <h3><?php echo EXVSFB ?></h3>
+    <p><?php echo COST_3000 ?></p>
+    <ul>
+        <li><?php echo N_GUNDAM ?></li>
+        <li><?php echo V2_GUNDAM ?></li>
+        <li><a href="<?php echo URL_EXVSFB ?>/turnx/index"><?php echo TURN_X ?></a></li>
+        <li><?php echo BANSHEE_NORN ?></li>
+    </ul>
+
+    <p><?php echo COST_2500 ?></p>
+    <ul>
+        <li><a href="<?php echo URL_EXVSFB ?>/cherudim/index"><?php echo CHERUDIM ?></a></li>
+    </ul>
+    <p><?php echo COST_2000 ?></p>
+    <p><?php echo COST_1000 ?></p>
+
     <hr>
-    <h3>EXVSMBON</h3>
-    <p>コスト3000</p>
+
+    <h3><?php echo EXVSMBON ?></h3>
+    <p><?php echo COST_3000 ?></p>
+    <p><?php echo COST_2500 ?></p>
+    <p><?php echo COST_2000 ?></p>
+    <p><?php echo COST_1500 ?></p>
 </div>
 <footer>
 </footer>

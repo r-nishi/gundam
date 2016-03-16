@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>EXVSコンボサイト</title>
+    <title><?php echo HP_NAME ?></title>
     <?php echo Asset::css('bootstrap.css'); ?>
     <style>
         a{
@@ -18,7 +18,7 @@
 <body>
 <header>
     <div class="container">
-        <h1>EXVSコンボサイト</h1>
+        <h1><?php echo HP_NAME ?></h1>
     </div>
 </header>
 <hr>
@@ -29,7 +29,7 @@
     <a class="btn btn-primary" href="<?php echo URL ?>/about/index">ABOUT</a>
 
     <h3>■概要</h3>
-    サイト名：EXVSコンボサイト（暫定）<br>
+    サイト名：<?php echo HP_NAME ?>（暫定）<br>
     管理人：24P<br>
     URL：http://hisuichan.com/gundam/public/top<br>
     GitHub：https://github.com/r-nishi/gundam.git<br>
