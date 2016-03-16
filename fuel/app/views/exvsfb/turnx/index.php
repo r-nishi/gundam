@@ -56,21 +56,22 @@
         コンボ選択
         <div id="selectBox" style="display:flex; padding-bottom:10px;">
             <?php for($i = 1; $atk_cnt >= $i; $i++): ?>
-                <?php if($i > 1): ?>
-                    &nbsp>>&nbsp
-                <?php endif ?>
-
                 <!-- ▼1つのセレクトボックス▼ -->
-                <select name="atk<?php echo $i ?>">
-                    <option value="">選択</option>
-                    <?php foreach($select_list as $value): ?>
-                        <?php if(!empty($sum_name) && $value == $sum_name[$keep]): ?>
-                            <option value="<?php echo $value ?>" name="<?php echo $value ?>" selected><?php echo $value ?></option>
-                        <?php else: ?>
-                            <option value="<?php echo $value ?>" name="<?php echo $value ?>"><?php echo $value ?></option>
-                        <?php endif ?>
-                    <?php endforeach; ?>
-                </select>
+                <div id="atk<?php echo $i ?>">
+                    <?php if($i > 1): ?>
+                    &nbsp>>&nbsp
+                    <?php endif ?>
+                    <select name="atk<?php echo $i ?>">
+                        <option value="">選択</option>
+                        <?php foreach($select_list as $value): ?>
+                            <?php if(!empty($sum_name) && $value == @$sum_name[$keep]): ?>
+                                <option value="<?php echo $value ?>" name="<?php echo $value ?>" selected><?php echo $value ?></option>
+                            <?php else: ?>
+                                <option value="<?php echo $value ?>" name="<?php echo $value ?>"><?php echo $value ?></option>
+                            <?php endif ?>
+                        <?php endforeach; ?>
+                    </select>
+                </div>
                 <!-- ▲1つのセレクトボックス▲ -->
 
                 <?php $keep++ ?>
@@ -78,7 +79,7 @@
         </div>
 
         <a class="btn btn-primary btn" onclick="addCheck()">追加</a>
-        <a class="btn btn-primary btn">削除</a>
+        <a class="btn btn-primary btn" onclick="delCheck()">削除</a>
         <input class="btn btn-primary btn" type="submit" value="計算">
     <?php echo Form::close() ?>
     <!-- ▲Form▲ -->
@@ -120,40 +121,48 @@
 <footer>
 </footer>
 </body>
-<script type="text/javascript">
-    // フォームを追加する
-    function addCheck(){
-        // セレクトボックスの数を取得
-        var getNumbers = document.getElementById("hidden").innerHTML;
-        // キャストしてインクリメント
-        var numbers = parseInt(getNumbers) + 1;
-        // 値を更新
-        document.getElementById("hidden").innerHTML = numbers;
+<?php echo Asset::js('common.js') ?>
+<script>
+// フォームを追加する
+function addCheck(){
+    // セレクトボックスの数を取得
+    var getNumbers = document.getElementById("hidden").innerHTML;
+    // キャストしてインクリメント
+    var numbers = parseInt(getNumbers) + 1;
+    // 値を更新
+    document.getElementById("hidden").innerHTML = numbers;
 
+    // 存在確認
+    var chk = document.getElementById("atk" + numbers);
+    if (chk == null) {
         // セレクトボックスを新規作成
         var makeHtmlCode =
             '&nbsp>> <select name="atk' + numbers + '">' +
-                '<option value="">選択</option>' +
-                '<?php foreach ($select_list as $key): ?>' +
-                    '<option value="<?php echo $key ?>"><?php echo $key ?></option>' +
-                '<?php endforeach ?>' +
+            '<option value="">選択</option>' +
+            '<?php foreach ($select_list as $key): ?>' +
+            '<option value="<?php echo $key ?>"><?php echo $key ?></option>' +
+            '<?php endforeach ?>' +
             '</select>';
 
         // 新しいセレクトボックスを作るための<div>タグを作成
         var div_element = document.createElement("div");
+        div_element.id = "atk" + numbers;
         div_element.innerHTML = makeHtmlCode;
 
         // selectBoxに新規作成したセレクトボックスを追記する
         var select_box_element = document.getElementById("selectBox");
         select_box_element.appendChild(div_element);
-
+    } else {
+        // セレクトボックスを新規作成
+        var makeHtmlCode =
+            '&nbsp>> <select name="atk' + numbers + '">' +
+            '<option value="">選択</option>' +
+            '<?php foreach ($select_list as $key): ?>' +
+            '<option value="<?php echo $key ?>"><?php echo $key ?></option>' +
+            '<?php endforeach ?>' +
+            '</select>';
+        chk.innerHTML = makeHtmlCode;
     }
-
-    // 念のため2つ目の方法を残しておく
-    function addCheckPart2(){
-        var makeHtmlCode = '<select onchange="addCheck();"><option value="">選択</option><?php foreach ($select_list as $key): ?><option value="<?php echo $key ?>"><?php echo $key ?></option><?php endforeach ?></select> >> ';
-        var select_box_code = document.getElementById("selectBox").innerHTML;
-        document.getElementById("selectBox").innerHTML = select_box_code + makeHtmlCode;
-    }
+}
 </script>
 </html>
