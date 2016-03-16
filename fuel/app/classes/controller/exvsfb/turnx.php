@@ -5,12 +5,12 @@
  */
 class Controller_Exvsfb_Turnx extends Controller_Exvsfb
 {
-	/**
-	 * @access  public
-	 * @return  Response
-	 */
-	public function action_index($sum_dame = null,$sum_name = array(),$atk_cnt = 1,$awakening = null)
-	{
+    /**
+     * @access  public
+     * @return  Response
+     */
+    public function action_index($sum_dame = null,$sum_name = array(),$atk_cnt = 1,$awakening = null)
+    {
         // セレクトボックス作成
         $select_list = array();
         foreach($this->damage_db as $key => $value){
@@ -30,7 +30,7 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
         }
 
         return Response::forge($view);
-	}
+    }
 
     /**
      * POSTを受け取る
@@ -221,13 +221,13 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
     }
 
     /**
-	 * The 404 action for the application.
-	 *
-	 * @access  public
-	 * @return  Response
-	 */
-	public function action_404()
-	{
-		return Response::forge(Presenter::forge('welcome/404'), 404);
-	}
+     * The 404 action for the application.
+     *
+     * @access  public
+     * @return  Response
+     */
+    public function action_404()
+    {
+        return Response::forge(Presenter::forge('welcome/404'), 404);
+    }
 }
