@@ -1,12 +1,12 @@
 <?php
+use Fuel\Core\Controller_Template;
+
 /**
  * @package  app
  * @extends  Controller
  */
 class Controller_Top extends Controller_Template
 {
-    public $template = "template";
-
     /**
      * @access  public
      */

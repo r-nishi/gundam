@@ -5,9 +5,24 @@
  */
 class Controller_Exvsfb_Turnx extends Controller_Exvsfb
 {
+    public $damage_db;
+
+    public function before(){
+        parent::before();
+        // ダメージ表読込
+        $this->damage_db = Config::load('ms/exvsfb/turnx/damage_db');
+    }
+
     /**
      * @access  public
      * @return  Response
+     *
+     * @param integer $sum_dame 累計ダメージ
+     * @param array $sum_name セレクトボックスから選んだ名前
+     * @param integer $atk_cnt セレクトボックスを何個表示させるか
+     * @param array
+     *
+     * @todo
      */
     public function action_index($sum_dame = null,$sum_name = array(),$atk_cnt = 1,$awakening = null)
     {
@@ -29,7 +44,7 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
             $view->set('awakening',$awakening);
         }
 
-        return Response::forge($view);
+        $this->template->content = $view;
     }
 
     /**
@@ -220,14 +235,4 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
         return $sum_down;
     }
 
-    /**
-     * The 404 action for the application.
-     *
-     * @access  public
-     * @return  Response
-     */
-    public function action_404()
-    {
-        return Response::forge(Presenter::forge('welcome/404'), 404);
-    }
 }

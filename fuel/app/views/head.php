@@ -1,5 +1,6 @@
 <meta charset="utf-8">
 <title><?php HP_NAME ?></title>
+<?php echo Asset::js('common.js') ?>
 <?php echo Asset::css('bootstrap.css') ?>
 <style>
     a{

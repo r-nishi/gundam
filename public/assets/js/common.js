@@ -1,7 +1,3 @@
-/**
- * Created by ryutaro on 16/03/16.
- */
-
 // フォームを削除する
 function delCheck(){
     // セレクトボックスの数を取得
