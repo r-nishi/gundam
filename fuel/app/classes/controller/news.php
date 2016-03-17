@@ -3,7 +3,7 @@
  * @package  app
  * @extends  Controller
  */
-class Controller_About extends Controller_Template
+class Controller_News extends Controller_Template
 {
     /**
      * The basic welcome message
@@ -18,7 +18,7 @@ class Controller_About extends Controller_Template
 
         $this->template->head = View::forge('head');
         $this->template->header = View::forge('header');
-        $this->template->content = View::forge('about/index');
+        $this->template->content = View::forge('news/index');
         $this->template->footer = View::forge('footer');
     }
 }

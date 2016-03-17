@@ -1,22 +1,22 @@
 <?php
+use Fuel\Core\Controller_Template;
+
 /**
- * Created by PhpStorm.
- * User: r-nishi
- * Date: 16/03/10
- * Time: 11:52
- * @extends Controller
+ * @access public
+ * @author r-nishi
+ * @copyright r-nishi
+ * @package Controller
+ * @extends Controller_Template
  */
-class Controller_Exvsfb extends Controller
+class Controller_Exvsfb extends Controller_Template
 {
-    protected $damage_db;
     protected $awakening_db; // 覚醒補正率表
 
     public function before()
     {
-        // ▼定義ファイル読み込み処理▼
+        parent::before();
 
-        // ダメージ表読込
-        $this->damage_db = Config::load('ms/exvsfb/turnx/damage_db');
+        // ▼定義ファイル読み込み処理▼
 
         // 覚醒補正率表読込
         $this->awakening_db = Config::load('awakening_db');
@@ -25,5 +25,8 @@ class Controller_Exvsfb extends Controller
         Config::load('constant',true);
         // ▲定義ファイル読み込み処理▲
 
+        $this->template->head = View::forge('head');
+        $this->template->header = View::forge('header');
+        $this->template->footer = View::forge('footer');
     }
 } 

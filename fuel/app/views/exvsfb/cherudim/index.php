@@ -4,15 +4,15 @@
     <a class="btn btn-primary" href="<?php echo URL ?>/exvsmbon/top">EXVSMBON</a>
     <a class="btn btn-primary" href="<?php echo URL ?>/about/index">ABOUT</a>
 
-    <h3>■ターンX</h3>
-    <p><?php echo Asset::img('ms/turnx.png') ?></p>
+    <h3>■<?php echo CHERUDIM ?></h3>
+    <p><?php echo Asset::img('ms/cherudim.png') ?></p>
     <br>
     <hr>
 
     <h3>■コンボ計算</h3>
     <!-- ▼Form▼ -->
     <?php $keep = 0 ?>
-    <?php echo Form::open(array('action'=> URL_EXVSFB.'/turnx/calculation','method'=>'post','name'=>'myForm')) ?>
+    <?php echo Form::open(array('action'=> URL_EXVSFB.'/cherudim/calculation','method'=>'post','name'=>'myForm')) ?>
         覚醒選択<br>
         <select name="awakening">
             <option value="">覚醒ナシ</option>
@@ -88,11 +88,6 @@
         }
         ?>
     </div>
-
-    <h3>■メモ</h3>
-    ・A覚醒時「メイン>>メイン>>メイン」は計算値189だが、実測値は190<br>
-    ・A覚醒時「メイン>>メイン→CS」は計算値217だが、実測値は218<br>
-    <hr>
 </div>
 <script>
 // フォームを追加する

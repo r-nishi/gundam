@@ -3,26 +3,19 @@
  * @author   r-nishi
  * @extends  Controller_Exvsfb
  */
-class Controller_Exvsfb_Turnx extends Controller_Exvsfb
+class Controller_Exvsfb_Cherudim extends Controller_Exvsfb
 {
     public $damage_db;
 
     public function before(){
         parent::before();
         // ダメージ表読込
-        $this->damage_db = Config::load('ms/exvsfb/turnx/damage_db');
+        $this->damage_db = Config::load('ms/exvsfb/cherudim/damage_db');
     }
 
     /**
      * @access  public
      * @return  Response
-     *
-     * @param integer $sum_dame 累計ダメージ
-     * @param array $sum_name セレクトボックスから選んだ名前
-     * @param integer $atk_cnt セレクトボックスを何個表示させるか
-     * @param array
-     *
-     * @todo
      */
     public function action_index($sum_dame = null,$sum_name = array(),$atk_cnt = 1,$awakening = null)
     {
@@ -32,7 +25,7 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
             $select_list[$key] = $key;
         }
 
-        $view = View::forge('exvsfb/turnx/index');
+        $view = View::forge('exvsfb/cherudim/index');
         $view->set('select_list',$select_list);
         $view->set('atk_cnt',$atk_cnt);
         $view->set('sum_name',$sum_name);
@@ -203,7 +196,7 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
 
         // ダメージ表読み込み
         foreach($this->awakening_db as $key => $value){
-            if("ターンX" == $key){
+            if("ケルディム" == $key){
                 foreach($value as $key2 => $value3){
                     if($para == $key2){
                         $return_data[$key2] = $value3;
