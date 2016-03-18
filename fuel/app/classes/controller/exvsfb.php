@@ -30,6 +30,46 @@ class Controller_Exvsfb extends Controller_Template
     }
 
     /**
+     * セレクトボックス生成
+     * @param array $damage_db ダメージデータ表
+     * @return array $select_list
+     */
+    final protected function make_select($damage_db)
+    {
+        $select_list = array();
+        foreach($damage_db as $key => $value){
+            $select_list[$key] = $key;
+        }
+        return $select_list;
+    }
+
+    /**
+     * view作成
+     * @param string $path URL
+     * @param $select_list
+     * @param int $atk_cnt 攻撃回数
+     * @param $sum_name
+     * @param $sum_damage
+     * @param $awakening
+     * @return $view view
+     */
+    final protected function make_view($path,$select_list,$atk_cnt,$sum_name,$sum_damage,$awakening)
+    {
+        $view = View::forge($path);
+        $view->set('select_list',$select_list);
+        $view->set('atk_cnt',$atk_cnt);
+        $view->set('sum_name',$sum_name);
+
+        if (!empty($sum_damage)) {
+            $view->set('sum_dame',$sum_damage);
+        }
+        if (!empty($awakening)) {
+            $view->set('awakening',$awakening);
+        }
+        return $view;
+    }
+
+    /**
      * 覚醒補正率を取得
      * @access final protected
      * @param varchar $awakening 覚醒種類(assault/blast)
@@ -78,5 +118,176 @@ class Controller_Exvsfb extends Controller_Template
             $sum_down += $down_point;
         }
         return $sum_down;
+    }
+
+    /**
+     * ダメージ値を計算する
+     * @access final protected
+     * @param array $data ダメージデータ表
+     * @param float $sum_damage 累計威力
+     * @param float $sum_scaling 累計補正率
+     * @param float $sum_down_point 累計ダウン値
+     * @param array $awakening 覚醒種類(assault/blast) => 覚醒補正率(1.2とか)
+     * @return array
+     */
+    final protected function damage_calculation($data,$sum_damage,$sum_scaling,$sum_down_point,$awakening)
+    {
+        $awakening_type = ""; // もし覚醒していたら値が入る
+        $awakening_scaling = 1;
+
+        if (!empty($awakening)) {
+            foreach ($awakening as $key => $value) {
+                $awakening_type = $key;
+                $awakening_scaling = $value;
+            }
+        }
+
+        $return_data = array();
+
+        foreach ($data as $key => $value):
+//             echo "<pre>";
+//             print_r($value);
+//             echo "</pre>";
+
+            $single_scaling = $value['damage_scaling'] / 100; // 0.05 -> -5%
+            $single_damage = $value['damage'];
+
+            if($sum_damage == 0){
+                // 覚醒補正率計算
+                if (!empty($awakening_type)) {
+                    $sum_damage = ceil($single_damage * $awakening_scaling);
+                } else {
+                    $sum_damage = $single_damage;
+                }
+
+                if (!empty($value['same_hit'])) {
+                    continue;
+                }
+            } else {
+
+                // 最低補正率は−10%
+                if ($sum_scaling < 0.1) {
+                    $sum_scaling = 0.1;
+                }
+
+                // float型の計算でバグったのでstring型にキャストして対応
+                $sum_scaling = (string)$sum_scaling;
+
+//                // debug用コード
+//                echo "累計補正率:";
+//                var_dump($sum_scaling);
+//                echo "<br>";
+
+                // 補正適応後単発ダメージ
+                $applied_single_damage = ceil($single_damage * $sum_scaling * $awakening_scaling);
+
+//                echo "単発威力:";
+//                var_dump($applied_single_damage);
+//                echo "<br>";
+
+                $sum_damage += $applied_single_damage;
+                // echo "累計威力:".$sum_damage."<br>"; // debug用コード
+
+                // 同時ヒット時計算
+                if (!empty($value['same_hit']) && $value['same_hit'] == 1) {
+                    continue;
+                }
+                if (!empty($value['same_hit']) && $value['same_hit'] == 2) {
+                    // 1回分多い
+                    $sum_scaling -= $single_scaling;
+
+                    // ダウン値計算
+                    $sum_down_point = $this->get_down_point($awakening_type,$sum_down_point,$value['down_point']);
+
+                }
+            }
+            $sum_scaling -= $single_scaling;
+
+            // ダウン値計算
+            $sum_down_point = $this->get_down_point($awakening_type,$sum_down_point,$value['down_point']);
+
+            // echo $sum_down_point."<br>"; // debug用コード
+            $sum_down_point = (string)$sum_down_point; // string型にキャストする(PHPは浮動小数点数の計算が苦手)
+
+            if ($sum_down_point >= 5) {
+                break;
+            }
+        endforeach;
+
+        $return_data['damage'] = $sum_damage;
+        $return_data['scaling'] = $sum_scaling;
+        $return_data['down_point'] = $sum_down_point;
+
+        return $return_data;
+    }
+
+    /**
+     * ポスト処理
+     * @param $data
+     * @param $ms_name
+     *
+     * @return array
+     * @internal param $atk_cnt
+     * @internal param $sum_damage
+     * @internal param $sum_scaling
+     * @internal param $sum_down_point
+     * @internal param $awakening
+     */
+    final protected function post_process($data,$ms_name)
+    {
+        $return_data = array();
+
+        $atk_cnt = 0; // 攻撃回数
+        $sum_damage = 0; // ダメージ合計値
+        $sum_scaling = 1; // 累計補正値
+        $sum_down_point = 0; // 累計ダウン値
+
+        $awakening = array(); // 覚醒種類と覚醒補正値
+        $tmp_data = array(); // 一時的にダメージ値を保存
+        $sum_name = array(); // 使用コンボ
+
+        // 覚醒取得
+        if(!empty($data['awakening'])){
+            $awakening = $this->get_awakening_db($data['awakening'],$ms_name);
+        }
+
+        // 受け取ったPOSTを空になるまで回す
+        foreach ($data as $key => $value) :
+
+            // 覚醒データは飛ばす
+            if($key == "awakening"){
+                continue;
+            }
+
+            $atk_cnt++; // 攻撃回数
+
+            // 無効な値が入ってきたらループを止める
+            if(empty($value)){
+                break;
+            }
+
+            // ダメージデータ表を回す
+            foreach ($this->damage_db as $key2 => $value2) :
+                if ($value == $key2) {
+                    $tmp_data = $this->damage_calculation($value2,$sum_damage,$sum_scaling,$sum_down_point,$awakening);
+                    $sum_damage = $tmp_data['damage'];
+                    $sum_scaling = $tmp_data['scaling'];
+                    $sum_down_point = $tmp_data['down_point'];
+                }
+            endforeach;
+
+            $sum_name[] = $value; // セレクトリスト維持の為に何を渡したか記憶
+
+            if ($sum_down_point >= 5) {
+                break;
+            }
+        endforeach;
+
+        $return_data['sum_damage'] = $sum_damage;
+        $return_data['sum_name'] = $sum_name;
+        $return_data['atk_cnt'] = $atk_cnt;
+        $return_data['awakening'] = $awakening;
+
+        return $return_data;
     }
 } 

@@ -14,190 +14,39 @@ class Controller_Exvsfb_Bansheenorn extends Controller_Exvsfb
     }
 
     /**
-     * @access  public
-     * @return  Response
+     * @access public
+     * @param int $sum_damage 累計ダメージ
+     * @param array $sum_name セレクトボックスから選んだ名前
+     * @param int $atk_cnt セレクトボックスを何個表示させるか
+     * @param string $awakening 覚醒の種類(assault/blast)
+     * @return Response
      */
-    public function action_index($sum_dame = null,$sum_name = array(),$atk_cnt = 1,$awakening = null)
+    public function action_index($sum_damage = null,$sum_name = array(),$atk_cnt = 1,$awakening = "")
     {
         // セレクトボックス作成
-        $select_list = array();
-        foreach($this->damage_db as $key => $value){
-            $select_list[$key] = $key;
-        }
+        $select_list = $this->make_select($this->damage_db);
 
-        $view = View::forge('exvsfb/bansheenorn/index');
-        $view->set('select_list',$select_list);
-        $view->set('atk_cnt',$atk_cnt);
-        $view->set('sum_name',$sum_name);
+        $path = "exvsfb/bansheenorn/index"; // 機体追加の際,ここだけパスを入れればOKなはず
 
-        if (!empty($sum_dame)) {
-            $view->set('sum_dame',$sum_dame);
-        }
-        if (!empty($awakening)) {
-            $view->set('awakening',$awakening);
-        }
+        // viewを作成
+        $view = $this->make_view($path,$select_list,$atk_cnt,$sum_name,$sum_damage,$awakening);
 
         $this->template->content = $view;
     }
 
     /**
      * POSTを受け取る
+     * @access public
+     * @return リダイレクト
      */
     public function action_calculation()
     {
-        $sum_dame = 0; // ダメージ合計値
-        $atk_cnt  = 0; // 攻撃回数
-        $sum_scal = 1; // 累計補正値
-        $sum_down_point = 0; // 累計ダウン値
-
-        $awakening = array(); // 覚醒種類と覚醒補正値
-        $tmp_data = array(); // 一時的にダメージ値を保存
-        $sum_name = array(); // 使用コンボ*現在めんどいのでシカト無視
-
         // POSTで受け取る
         $data = Input::post();
 
-//        echo "<pre>";
-//        print_r($data);
-//        echo "</pre>";
+        $ms_name = BANSHEE_NORN; // 機体追加の際、ここに機体名の定数を入れてあげる
+        $rtn_data = $this->post_process($data,$ms_name);
 
-        // 覚醒取得
-        if(!empty($data['awakening'])){
-            $awakening = $this->get_awakening_db($data['awakening'],BANSHEE_NORN);
-        }
-
-        // 受け取ったPOSTを空になるまで回す
-        foreach ($data as $key => $value) :
-
-            // 覚醒データは飛ばす
-            if($key == "awakening"){
-                continue;
-            }
-
-            $atk_cnt++; // 攻撃回数
-
-            // 無効な値が入ってきたらループを止める
-            if(empty($value)){
-                break;
-            }
-
-            // ダメージデータ表を回す
-            foreach ($this->damage_db as $key2 => $value2) :
-                if ($value == $key2) {
-                    $tmp_data = $this->damage_calculation($value2,$sum_dame,$sum_scal,$sum_down_point,$awakening);
-                    $sum_dame = $tmp_data['damage'];
-                    $sum_scal = $tmp_data['scaling'];
-                    $sum_down_point = $tmp_data['down_point'];
-                }
-            endforeach;
-
-            $sum_name[] = $value; // セレクトリスト維持の為に何を渡したか記憶
-
-            if ($sum_down_point >= 5) {
-                break;
-            }
-
-        endforeach;
-        return $this->action_index($sum_dame,$sum_name,$atk_cnt,$data['awakening']);
-    }
-
-    /**
-     * ダメージ値を計算する
-     * @para float $sum_scal 累計補正率
-     */
-    private function damage_calculation($data,$sum_dame,$sum_scal,$sum_down_point,$awakening)
-    {
-        $単発威力 = 0;
-        $単発補正率 = 0;
-
-        $累計威力 = $sum_dame;
-        $累計補正率 = $sum_scal;
-        $累計ダウン値 = $sum_down_point;
-        $覚醒種類 = ""; // もし覚醒していたら値が入る
-        $覚醒補正率 = 1;
-
-        if (!empty($awakening)) {
-            foreach ($awakening as $key => $value) {
-                $覚醒種類 = $key;
-                $覚醒補正率 = $value;
-            }
-        }
-
-        $return_data = array();
-
-        foreach ($data as $key => $value):
-//             echo "<pre>";
-//             print_r($value);
-//             echo "</pre>";
-
-            $単発補正率 = $value['damage_scaling'] / 100; // 0.05 -> -5%
-            $単発威力 = $value['damage'];
-
-            if($累計威力 == 0){
-                // 覚醒補正率計算
-                if (!empty($覚醒種類)) {
-                    $累計威力 = ceil($単発威力 * $覚醒補正率);
-                } else {
-                    $累計威力 = $単発威力;
-                }
-
-                if (!empty($value['same_hit'])) {
-                    continue;
-                }
-            } else {
-
-                // 最低補正率は−10%
-                if ($累計補正率 < 0.1) {
-                    $累計補正率 = 0.1;
-                }
-
-                // float型の計算でバグったのでstring型にキャストして対応
-                $累計補正率 = (string)$累計補正率;
-
-//                // debug用コード
-//                echo "累計補正率:";
-//                var_dump($累計補正率);
-//                echo "<br>";
-
-                $補正適応後単発威力 = ceil($単発威力 * $累計補正率 * $覚醒補正率);
-
-//                echo "単発威力:";
-//                var_dump($補正適応後単発威力);
-//                echo "<br>";
-
-                $累計威力 += $補正適応後単発威力;
-                // echo "累計威力:".$累計威力."<br>"; // debug用コード
-
-                // 同時ヒット時計算
-                if (!empty($value['same_hit']) && $value['same_hit'] == 1) {
-                    continue;
-                }
-                if (!empty($value['same_hit']) && $value['same_hit'] == 2) {
-                    // 1回分多い
-                    $累計補正率 -= $単発補正率;
-
-                    // ダウン値計算
-                    $累計ダウン値 = $this->get_down_point($覚醒種類,$累計ダウン値,$value['down_point']);
-
-                }
-            }
-            $累計補正率 -= $単発補正率;
-
-            // ダウン値計算
-            $累計ダウン値 = $this->get_down_point($覚醒種類,$累計ダウン値,$value['down_point']);
-
-            // echo $累計ダウン値."<br>"; // debug用コード
-            $累計ダウン値 = (string)$累計ダウン値; // string型にキャストする(PHPは浮動小数点数の計算が苦手)
-
-            if ($累計ダウン値 >= 5) {
-                break;
-            }
-        endforeach;
-
-        $return_data['damage'] = $累計威力;
-        $return_data['scaling'] = $累計補正率;
-        $return_data['down_point'] = $累計ダウン値;
-
-        return $return_data;
+        return $this->action_index($rtn_data['sum_damage'],$rtn_data['sum_name'],$rtn_data['atk_cnt'],$data['awakening']);
     }
 }
