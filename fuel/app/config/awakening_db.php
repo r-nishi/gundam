@@ -6,12 +6,16 @@
  */
 return array(
     // 3000
-    "ターンX" => array(
+    TURN_X => array(
+        "assault" => 1.2,
+        "blast" => 1,
+    ),
+    BANSHEE_NORN => array(
         "assault" => 1.2,
         "blast" => 1,
     ),
     // 2500
-    "ケルディム" => array(
+    CHERUDIM => array(
         "assault" => 1.12,
         "blast" => 1.03,
     ),

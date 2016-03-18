@@ -17,12 +17,11 @@ class Controller_Exvsfb extends Controller_Template
         parent::before();
 
         // ▼定義ファイル読み込み処理▼
+        // グローバル定数設定
+        Config::load('constant',true);
 
         // 覚醒補正率表読込
         $this->awakening_db = Config::load('awakening_db');
-
-        // グローバル定数設定
-        Config::load('constant',true);
         // ▲定義ファイル読み込み処理▲
 
         $this->template->head = View::forge('head');

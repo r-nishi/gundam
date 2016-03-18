@@ -11,7 +11,7 @@
         <li><?php echo N_GUNDAM ?></li>
         <li><?php echo V2_GUNDAM ?></li>
         <li><a href="<?php echo URL_EXVSFB ?>/turnx/index"><?php echo TURN_X ?></a></li>
-        <li><?php echo BANSHEE_NORN ?></li>
+        <li><a href="<?php echo URL_EXVSFB ?>/bansheenorn/index"><?php echo BANSHEE_NORN ?></a></li>
     </ul>
 
     <p><?php echo COST_2500 ?></p>
