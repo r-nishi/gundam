@@ -70,7 +70,7 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
 
         // 覚醒取得
         if(!empty($data['awakening'])){
-            $awakening = $this->get_awakening_db($data['awakening']);
+            $awakening = $this->get_awakening_db($data['awakening'],"ターンX");
         }
 
         // 受け取ったPOSTを空になるまで回す
@@ -193,46 +193,4 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
 
         return $return_data;
     }
-
-    /**
-     * 覚醒補正率を取得
-     */
-    private function get_awakening_db($para)
-    {
-        $return_data = array();
-
-        // ダメージ表読み込み
-        foreach($this->awakening_db as $key => $value){
-            if("ターンX" == $key){
-                foreach($value as $key2 => $value3){
-                    if($para == $key2){
-                        $return_data[$key2] = $value3;
-                    }
-                }
-            }
-        }
-
-        return $return_data;
-    }
-
-    /**
-     * ダウン値計算
-     */
-    private function get_down_point($awakening,$sum_down,$down_point)
-    {
-        /* TXでの計算結果だけだが、おそらく覚醒中のダウン値は切り上げではなく丸めると考えられる */
-
-        if ((!empty($awakening))) {
-            // 小数点第３位を丸める
-            $sum_down += round($down_point * 0.9,2);
-
-            // 小数点第３位を切り上げ(一応処理を残しておく)
-            // $tmp_down_point = $value['down_point'] * 0.9;
-            // $累計ダウン値 += ceil($tmp_down_point * 100) / 100;
-        } else {
-            $sum_down += $down_point;
-        }
-        return $sum_down;
-    }
-
 }
