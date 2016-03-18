@@ -103,7 +103,7 @@ class Controller_Exvsfb_Bansheenorn extends Controller_Exvsfb
 
     /**
      * ダメージ値を計算する
-     *
+     * @para float $sum_scal 累計補正率
      */
     private function damage_calculation($data,$sum_dame,$sum_scal,$sum_down_point,$awakening)
     {
@@ -151,8 +151,22 @@ class Controller_Exvsfb_Bansheenorn extends Controller_Exvsfb
                     $累計補正率 = 0.1;
                 }
 
+                // float型の計算でバグったのでstring型にキャストして対応
+                $累計補正率 = (string)$累計補正率;
+
+//                // debug用コード
+//                echo "累計補正率:";
+//                var_dump($累計補正率);
+//                echo "<br>";
+
                 $補正適応後単発威力 = ceil($単発威力 * $累計補正率 * $覚醒補正率);
+
+//                echo "単発威力:";
+//                var_dump($補正適応後単発威力);
+//                echo "<br>";
+
                 $累計威力 += $補正適応後単発威力;
+                // echo "累計威力:".$累計威力."<br>"; // debug用コード
 
                 // 同時ヒット時計算
                 if (!empty($value['same_hit']) && $value['same_hit'] == 1) {
