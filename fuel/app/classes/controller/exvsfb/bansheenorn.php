@@ -3,14 +3,14 @@
  * @author   r-nishi
  * @extends  Controller_Exvsfb
  */
-class Controller_Exvsfb_Cherudim extends Controller_Exvsfb
+class Controller_Exvsfb_Bansheenorn extends Controller_Exvsfb
 {
     public $damage_db;
 
     public function before(){
         parent::before();
         // ダメージ表読込
-        $this->damage_db = Config::load('ms/exvsfb/cherudim/damage_db');
+        $this->damage_db = Config::load('ms/exvsfb/bansheenorn/damage_db');
     }
 
     /**
@@ -26,7 +26,7 @@ class Controller_Exvsfb_Cherudim extends Controller_Exvsfb
         // セレクトボックス作成
         $select_list = $this->make_select($this->damage_db);
 
-        $path = "exvsfb/cherudim/index"; // 機体追加の際,ここだけパスを入れればOKなはず
+        $path = "exvsfb/bansheenorn/index"; // 機体追加の際,ここだけパスを入れればOKなはず
 
         // viewを作成
         $view = $this->make_view($path,$select_list,$atk_cnt,$sum_name,$sum_damage,$awakening);
@@ -44,7 +44,7 @@ class Controller_Exvsfb_Cherudim extends Controller_Exvsfb
         // POSTで受け取る
         $data = Input::post();
 
-        $ms_name = CHERUDIM; // 機体追加の際、ここに機体名の定数を入れてあげる
+        $ms_name = BANSHEE_NORN; // 機体追加の際、ここに機体名の定数を入れてあげる
         $rtn_data = $this->post_process($data,$ms_name);
 
         return $this->action_index($rtn_data['sum_damage'],$rtn_data['sum_name'],$rtn_data['atk_cnt'],$data['awakening']);
