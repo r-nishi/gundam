@@ -4,7 +4,7 @@
     <a class="btn btn-primary" href="<?php echo URL ?>/exvsmbon/top">EXVSMBON</a>
     <a class="btn btn-primary" href="<?php echo URL ?>/about/index">ABOUT</a>
 
-    <h3>■ターンX</h3>
+    <h3>■<a href="./index"><?php echo TURN_X ?></a></h3>
     <p><?php echo Asset::img('ms/turnx.png') ?></p>
     <br>
     <hr>

@@ -134,6 +134,7 @@ class Controller_Exvsfb extends Controller_Template
     {
         $awakening_type = ""; // もし覚醒していたら値が入る
         $awakening_scaling = 1;
+        $same_hit = 1; //同時ヒット回数
 
         if (!empty($awakening)) {
             foreach ($awakening as $key => $value) {
@@ -189,16 +190,19 @@ class Controller_Exvsfb extends Controller_Template
                 // echo "累計威力:".$sum_damage."<br>"; // debug用コード
 
                 // 同時ヒット時計算
-                if (!empty($value['same_hit']) && $value['same_hit'] == 1) {
+                if (!empty($value['same_hit']) && $value['same_hit'] == "beginning") {
                     continue;
                 }
-                if (!empty($value['same_hit']) && $value['same_hit'] == 2) {
-                    // 1回分多い
-                    $sum_scaling -= $single_scaling;
-
-                    // ダウン値計算
-                    $sum_down_point = $this->get_down_point($awakening_type,$sum_down_point,$value['down_point']);
-
+                if (!empty($value['same_hit']) && $value['same_hit'] == "middle") {
+                    $same_hit++;
+                    continue;
+                }
+                if (!empty($value['same_hit']) && $value['same_hit'] == "end") {
+                    for ($cnt = 0; $cnt <= $same_hit; $cnt++) {
+                        $sum_scaling -= $single_scaling;
+                        // ダウン値計算
+                        $sum_down_point = $this->get_down_point($awakening_type,$sum_down_point,$value['down_point']);
+                    }
                 }
             }
             $sum_scaling -= $single_scaling;
