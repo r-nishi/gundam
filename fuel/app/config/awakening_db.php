@@ -11,7 +11,7 @@ return array(
         "blast" => 1,
     ),
     BANSHEE_NORN => array(
-        "assault" => 1.2,
+        "assault" => 1.07,
         "blast" => 1,
     ),
     // 2500
