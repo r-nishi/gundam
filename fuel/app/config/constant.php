@@ -10,7 +10,7 @@ return array(
     define("URL_EXVSMBON","http://".$_SERVER["HTTP_HOST"]."/gundam/public/exvsmbon"),
 
     // サイト名
-    define("HP_NAME","EXVSFB/MBONダメージ計算"),
+    define("HP_NAME","EXVSFBダメージ計算"),
 
     // メニューリンク名
     define("TOP","TOP"),
