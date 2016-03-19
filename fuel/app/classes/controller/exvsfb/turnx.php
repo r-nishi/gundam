@@ -19,9 +19,10 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
      * @param array $sum_name セレクトボックスから選んだ名前
      * @param int $atk_cnt セレクトボックスを何個表示させるか
      * @param string $awakening 覚醒の種類(assault/blast)
+     * @param float $sum_down 累計ダウン値
      * @return Response
      */
-    public function action_index($sum_damage = null,$sum_name = array(),$atk_cnt = 1,$awakening = "")
+    public function action_index($sum_damage = null,$sum_name = array(),$atk_cnt = 1,$awakening = "",$sum_down = 0.0)
     {
         // セレクトボックス作成
         $select_list = $this->make_select($this->damage_db);
@@ -29,7 +30,7 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
         $path = "exvsfb/turnx/index"; // 機体追加の際,ここだけパスを入れればOKなはず
 
         // viewを作成
-        $view = $this->make_view($path,$select_list,$atk_cnt,$sum_name,$sum_damage,$awakening);
+        $view = $this->make_view($path,$select_list,$atk_cnt,$sum_name,$sum_damage,$awakening,$sum_down);
 
         $this->template->content = $view;
     }
@@ -47,6 +48,12 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
         $ms_name = TURN_X; // 機体追加の際、ここに機体名の定数を入れてあげる
         $rtn_data = $this->post_process($data,$ms_name);
 
-        return $this->action_index($rtn_data['sum_damage'],$rtn_data['sum_name'],$rtn_data['atk_cnt'],$data['awakening']);
+        return $this->action_index(
+            $rtn_data['sum_damage'],
+            $rtn_data['sum_name'],
+            $rtn_data['atk_cnt'],
+            $data['awakening'],
+            $rtn_data['sum_down']
+        );
     }
 }
