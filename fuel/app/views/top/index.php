@@ -1,8 +1,4 @@
 <div class="container">
-    <a class="btn btn-primary" href="<?php echo URL ?>/top/index"><?php echo TOP ?></a>
-    <a class="btn btn-primary" href="<?php echo URL ?>/about/index"><?php echo ABOUT ?></a>
-    <a class="btn btn-primary" href="<?php echo URL ?>/news/index"><?php echo NEWS ?></a>
-
     <h3><?php echo EXVSFB ?></h3>
     <p><?php echo COST_3000 ?></p>
     <ul>

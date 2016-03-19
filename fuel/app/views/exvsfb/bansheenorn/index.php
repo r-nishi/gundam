@@ -1,12 +1,7 @@
 <div class="container">
-    <a class="btn btn-primary" href="<?php echo URL ?>/top/index">TOP</a>
-    <a class="btn btn-primary" href="<?php echo URL ?>/about/index">ABOUT</a>
-    <a class="btn btn-primary" href="<?php echo URL ?>/news/index"><?php echo NEWS ?></a>
-
     <h3><a href="./index"><?php echo BANSHEE_NORN ?></a></h3>
     <p><?php //echo Asset::img('ms/bansheenorn.png') ?></p>
     <hr>
-
     <h4>■コンボ計算</h4>
     <!-- ▼Form▼ -->
     <?php $keep = 0 ?>

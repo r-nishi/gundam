@@ -7,7 +7,6 @@
 <header>
     <?php echo $header ?>
 </header>
-<hr/>
 <div class="container">
     <?php echo $content ?>
 </div>
