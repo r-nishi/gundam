@@ -7,10 +7,9 @@
 
     <h3>■<a href="./index"><?php echo TURN_X ?></a></h3>
     <p><?php //echo Asset::img('ms/turnx.png') ?></p>
-    <br>
     <hr>
 
-    <h3>■コンボ計算</h3>
+    <h4>■コンボ計算</h4>
     <!-- ▼Form▼ -->
     <?php $keep = 0 ?>
     <?php echo Form::open(array('action'=> URL_EXVSFB.'/turnx/calculation','method'=>'post','name'=>'myForm')) ?>
@@ -61,10 +60,12 @@
     <?php echo Form::close() ?>
     <!-- ▲Form▲ -->
 
+    <hr>
+    <h4>■計算結果</h4>
+    <div>選択コンボ：
     <?php
     if (!empty($sum_name)) {
         $cnt = count($sum_name);
-        echo "<p><div>";
         foreach($sum_name as $value){
             $cnt--;
             echo $value;
@@ -72,13 +73,26 @@
                 echo ">>";
             }
         }
-        echo "</p></div>";
-    }
-    if (!empty($sum_dame)) {
-        echo "<p><div>合計ダメージ：".$sum_dame."</div></p>";
     }
     ?>
-    <br />
+    </div>
+
+    <div>合計ダメージ：
+        <?php
+        if (!empty($sum_dame)) {
+            echo $sum_dame;
+        }
+        ?>
+    </div>
+
+    <div>合計ダウン値：
+        <?php
+        if (!empty($sum_down)) {
+            echo $sum_down;
+        }
+        ?>
+    </div>
+
     <hr>
     <div hidden id="hidden">
         <?php
@@ -90,7 +104,7 @@
         ?>
     </div>
 
-    <h3>■メモ</h3>
+    <h4>■メモ</h4>
     ・A覚醒時「メイン>>メイン>>メイン」は計算値189だが、実測値は190<br>
     ・A覚醒時「メイン>>メイン→CS」は計算値217だが、実測値は218<br>
     <hr>

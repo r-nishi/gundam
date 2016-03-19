@@ -16,7 +16,7 @@
 
     <p><?php echo COST_2500 ?></p>
     <ul>
-        <li><a href="<?php echo URL_EXVSFB ?>/cherudim/index"><?php echo CHERUDIM ?></a></li>
+        <li><?php echo CHERUDIM ?></li>
     </ul>
     <p><?php echo COST_2000 ?></p>
     <p><?php echo COST_1000 ?></p>

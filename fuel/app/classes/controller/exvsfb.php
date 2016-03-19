@@ -51,9 +51,10 @@ class Controller_Exvsfb extends Controller_Template
      * @param $sum_name
      * @param $sum_damage
      * @param $awakening
+     * @param float $sum_down 累計ダウン値
      * @return $view view
      */
-    final protected function make_view($path,$select_list,$atk_cnt,$sum_name,$sum_damage,$awakening)
+    final protected function make_view($path,$select_list,$atk_cnt,$sum_name,$sum_damage,$awakening,$sum_down)
     {
         $view = View::forge($path);
         $view->set('select_list',$select_list);
@@ -65,6 +66,9 @@ class Controller_Exvsfb extends Controller_Template
         }
         if (!empty($awakening)) {
             $view->set('awakening',$awakening);
+        }
+        if (!empty($sum_down)) {
+            $view->set('sum_down',$sum_down);
         }
         return $view;
     }
@@ -291,6 +295,7 @@ class Controller_Exvsfb extends Controller_Template
         $return_data['sum_name'] = $sum_name;
         $return_data['atk_cnt'] = $atk_cnt;
         $return_data['awakening'] = $awakening;
+        $return_data['sum_down'] = $sum_down_point;
 
         return $return_data;
     }
