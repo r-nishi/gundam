@@ -3,9 +3,10 @@
     <a class="btn btn-primary" href="<?php echo URL ?>/exvsfb/top">EXVSFB</a>
     <a class="btn btn-primary" href="<?php echo URL ?>/exvsmbon/top">EXVSMBON</a>
     <a class="btn btn-primary" href="<?php echo URL ?>/about/index">ABOUT</a>
+    <a class="btn btn-primary" href="<?php echo URL ?>/news/index"><?php echo NEWS ?></a>
 
     <h3>■<?php echo CHERUDIM ?></h3>
-    <p><?php echo Asset::img('ms/cherudim.png') ?></p>
+    <p><?php //echo Asset::img('ms/cherudim.png') ?></p>
     <br>
     <hr>
 

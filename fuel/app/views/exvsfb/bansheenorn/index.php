@@ -3,8 +3,9 @@
     <a class="btn btn-primary" href="<?php echo URL ?>/exvsfb/top">EXVSFB</a>
     <a class="btn btn-primary" href="<?php echo URL ?>/exvsmbon/top">EXVSMBON</a>
     <a class="btn btn-primary" href="<?php echo URL ?>/about/index">ABOUT</a>
+    <a class="btn btn-primary" href="<?php echo URL ?>/news/index"><?php echo NEWS ?></a>
 
-    <h3>■<?php echo BANSHEE_NORN ?></h3>
+    <h3>■<a href="./index"><?php echo BANSHEE_NORN ?></a></h3>
     <p><?php //echo Asset::img('ms/bansheenorn.png') ?></p>
     <br>
     <hr>
@@ -88,6 +89,9 @@
         }
         ?>
     </div>
+
+    <h3>■メモ</h3>
+    後(スタン)にはダメージ、補正、ダウン値が0なので通常のコンボレシピを選択可能
     <hr>
 </div>
 <script>

@@ -6,9 +6,9 @@
 return array(
     "メイン" => array(
         "1" => array(
-        "damage"         => 75,  // ダメージ
-        "down_point"     => 2.0, // ダウン値
-        "damage_scaling" => 30,  // 補正値
+            "damage"         => 75,  // ダメージ
+            "down_point"     => 2.0, // ダウン値
+            "damage_scaling" => 30,  // 補正値
         ),
     ),
     "メイン→サブ" => array(
@@ -29,17 +29,17 @@ return array(
         ),
     ),
     "CS" => array(
-        "1" => array(
+        "CS1" => array(
             "damage"         => 65,
             "down_point"     => 3.0,
             "damage_scaling" => 20,
-            "same_hit"       => 1    // 同時ヒット
+            "same_hit"       => "beginning",
         ),
-        "2" => array(
+        "CS2" => array(
             "damage"         => 65,
             "down_point"     => 3.0,
             "damage_scaling" => 20,
-            "same_hit"       => 2    // 同時ヒット
+            "same_hit"       => "end"
         )
     ),
     "サブ" => array(
