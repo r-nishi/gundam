@@ -6,6 +6,7 @@
     <a class="btn btn-primary" href="<?php echo URL ?>/news/index"><?php echo NEWS ?></a>
     <h3>■News</h3>
     <ul>
+        <li>2016/03/19:バンシィ・ノルン 新規追加</li>
         <li>2016/03/17:ケルディム 新規追加</li>
     </ul>
 </div>
