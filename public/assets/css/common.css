@@ -16,50 +16,42 @@ h1{
     font-size: 25px;
 }
 
-/*
-body {
-    margin: 0px 0px 40px 0px;
-    -webkit-text-size-adjust: 100%;
+/* ドロワー系 */
+.drawer-nav {
+    color: #fff;
+    background-color: #000;
 }
-*/
+
+/* ドロワーリンク系 */
+.drawer-nav a{
+    color: #fff;
+    text-decoration: none;
+}
+.drawer-nav a:visited{
+    color: #fff;
+}
+.drawer-nav a:hover{
+    color: #aaa;
+    text-decoration: none;
+}
 
 /* リンク系 */
-/*
+a {
+    color: #000;
+    text-decoration: none;
+}
 a:visited {
     color: #000;
 }
 a:hover{
-    color: #302f3d;
+    color: #aaa;
     text-decoration: none;
 }
-*/
-
-/* ドロワー系 */
-/*.drawer-nav {*/
-    /*color: #fff;*/
-    /*background-color: #000;*/
-    /*padding: 10px;*/
-/*}*/
-
-/* ドロワーリンク系 */
-/*.drawer-nav a{*/
-    /*color: #fff;*/
-    /*text-decoration: none;*/
-/*}*/
-/*.drawer-nav a:visited{*/
-    /*color: #fff;*/
-/*}*/
-/*.drawer-nav a:hover{*/
-    /*color: #302f3d;*/
-    /*text-decoration: none;*/
-/*}*/
 
 /* ドロワードロップダウン系 */
-/*.drawer-dropdown-menu {*/
-    /*background-color: #000;*/
-    /*padding-left: 24px;*/
-    /*padding-left: 1.5rem;*/
-/*}*/
+.drawer-dropdown-menu {
+    background-color: #000;
+}
 
 /* ボタン系 */
 /*
