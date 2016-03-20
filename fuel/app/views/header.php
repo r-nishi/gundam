@@ -5,8 +5,7 @@
 
 <nav class="drawer-nav" role="navigation">
   <ul class="drawer-menu">
-    <li><a class="drawer-brand" href="./index.html">Drawer</a></li>
-    <li><a class="drawer-menu-item" href="<?php echo URL ?>/top/index"><?php echo TOP ?></a></li>
+    <li><a class="drawer-brand" href="<?php echo URL ?>/top/index"><?php echo EXVSFB ?></a></li>
     <li class="drawer-dropdown">
       <a class="drawer-menu-item" data-target="#" href="#" data-toggle="dropdown" role="button" aria-expanded="false">
         <?php echo COST_3000 ?> <span class="drawer-caret"></span>
@@ -33,5 +32,6 @@
     </li>
     <li><a class="drawer-menu-item" href="<?php echo URL ?>/about/index"><?php echo ABOUT ?></a></li>
     <li><a class="drawer-menu-item" href="<?php echo URL ?>/news/index"><?php echo NEWS ?></a></li>
+    <li><a class="drawer-menu-item" href="<?php echo URL ?>/exvsmbon/index"><?php echo EXVSMBON ?>ダメージ計算</a></li>
   </ul>
 </nav>
