@@ -16,7 +16,7 @@ class Controller_Top extends Controller_Template
         Config::load('constant',true);
 
         $this->template->head = View::forge('head');
-        $this->template->header = View::forge('header');
+        $this->template->drawer = View::forge('drawer');
         $this->template->content = View::forge('top/index');
         $this->template->footer = View::forge('footer');
     }

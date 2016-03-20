@@ -25,7 +25,7 @@ class Controller_Exvsfb extends Controller_Template
         // ▲定義ファイル読み込み処理▲
 
         $this->template->head = View::forge('head');
-        $this->template->header = View::forge('header');
+        $this->template->drawer = View::forge('drawer');
         $this->template->footer = View::forge('footer');
     }
 

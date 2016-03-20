@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <?php echo $head ?>
+</head>
+<body>
+<header>
+    <?php echo $header ?>
+</header>
+<div class="container">
+    <?php echo $content ?>
+</div>
+<footer>
+    <?php echo $footer ?>
+</footer>
+</body>
+</html>
