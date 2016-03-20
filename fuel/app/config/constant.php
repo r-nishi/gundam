@@ -5,9 +5,9 @@
  */
 return array(
     // PATH
-    define("URL","http://".$_SERVER["HTTP_HOST"]."/gundam/public"),
-    define("URL_EXVSFB","http://".$_SERVER["HTTP_HOST"]."/gundam/public/exvsfb"),
-    define("URL_EXVSMBON","http://".$_SERVER["HTTP_HOST"]."/gundam/public/exvsmbon"),
+    define("URL","http://".$_SERVER["HTTP_HOST"]."/gundam"),
+    define("URL_EXVSFB","http://".$_SERVER["HTTP_HOST"]."/gundam/exvsfb"),
+    define("URL_EXVSMBON","http://".$_SERVER["HTTP_HOST"]."/gundam/exvsmbon"),
 
     // サイト名
     define("HP_NAME","EXVSFBダメージ計算"),
