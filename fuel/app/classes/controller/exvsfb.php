@@ -30,6 +30,10 @@ class Controller_Exvsfb extends Controller_Template
         //$this->template->footer = View::forge('footer');
     }
 
+    public function action_index(){
+        $this->template->content = View::forge('exvsfb/index');
+    }
+
     /**
      * セレクトボックス生成
      * @param array $damage_db ダメージデータ表

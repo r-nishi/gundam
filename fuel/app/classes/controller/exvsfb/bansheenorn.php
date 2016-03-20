@@ -27,7 +27,7 @@ class Controller_Exvsfb_Bansheenorn extends Controller_Exvsfb
         // セレクトボックス作成
         $select_list = $this->make_select($this->damage_db);
 
-        $path = "exvsfb/bansheenorn/index"; // 機体追加の際,ここだけパスを入れればOKなはず
+        $path = "exvsfb/ms/bansheenorn/index"; // 機体追加の際,ここだけパスを入れればOKなはず
 
         // viewを作成
         $view = $this->make_view($path,$select_list,$atk_cnt,$sum_name,$sum_damage,$awakening,$sum_down);
