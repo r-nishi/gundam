@@ -5,37 +5,16 @@
 <?php echo Asset::js('jquery-1.12.1.min.js') ?>
 <?php echo Asset::js('iscroll.min.js') ?>
 <?php echo Asset::js('drawer.min.js') ?>
-<?php echo Asset::css('bootstrap.css') ?>
+<script src="https://cdn.rawgit.com/ungki/bootstrap.dropdown/3.3.5/dropdown.min.js"></script>
+
 <?php echo Asset::css('drawer.min.css') ?>
-<style>
-    a{
-        color: #883ced;
-    }
-    a:hover{
-        color: #af4cf0;
-    }
-    .btn.btn-primary{
-        color:#ffffff!important;
-        background-color:#883ced;background-repeat:repeat-x;
-        background-image:-khtml-gradient(linear, left top, left bottom, from(#fd6ef7), to(#883ced));
-        background-image:-moz-linear-gradient(top, #fd6ef7, #883ced);
-        background-image:-ms-linear-gradient(top, #fd6ef7, #883ced);
-        background-image:-webkit-gradient(linear, left top, left bottom, color-stop(0%, #fd6ef7), color-stop(100%, #883ced));
-        background-image:-webkit-linear-gradient(top, #fd6ef7, #883ced);
-        background-image:-o-linear-gradient(top, #fd6ef7, #883ced);
-        background-image:linear-gradient(top, #fd6ef7, #883ced);
-        filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#fd6ef7', endColorstr='#883ced', GradientType=0);
-        text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);
-        border-color:#883ced #883ced #003f81;border-color:rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
-    }
-    body {
-        margin: 0px 0px 40px 0px;
-        -webkit-text-size-adjust: 100%;
-    }
-</style>
+<?php //echo Asset::css('bootstrap.css') ?>
 <?php echo Asset::css('common.css') ?>
+
 <script>
     $(document).ready(function() {
-        $('.drawer').drawer();
+        $('.drawer').drawer(
+
+        );
     });
 </script>

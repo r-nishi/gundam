@@ -5,10 +5,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Sandbox: Drawer Left with sidebar</title>
-
-    <?php echo Asset::css('sandbox.css') ?>
-    <?php echo Asset::css('drawer.min.css') ?>
-
+    <link href="sandbox.css" rel="stylesheet">
+    <link href="../dist/css/drawer.min.css" rel="stylesheet">
 </head>
 <body class="drawer drawer--left drawer--sidebar">
 
@@ -66,10 +64,10 @@
     </section>
 </main>
 
-<?php echo Asset::js('jquery-1.12.1.min.js') ?>
-<?php echo Asset::js('iscroll.min.js') ?>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/iScroll/5.1.3/iscroll.min.js"></script>
 <script src="https://cdn.rawgit.com/ungki/bootstrap.dropdown/3.3.5/dropdown.min.js"></script>
-<?php echo Asset::js('drawer.min.js') ?>
+<script src="../dist/js/drawer.min.js" charset="utf-8"></script>
 <script>
     $(document).ready(function() {
         $('.drawer').drawer();
