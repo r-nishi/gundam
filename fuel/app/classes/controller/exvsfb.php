@@ -11,6 +11,7 @@ use Fuel\Core\Controller_Template;
 class Controller_Exvsfb extends Controller_Template
 {
     protected $awakening_db; // 覚醒補正率表
+    public $template = 'exvsfb/template';
 
     public function before()
     {
@@ -24,10 +25,10 @@ class Controller_Exvsfb extends Controller_Template
         $this->awakening_db = Config::load('awakening_db');
         // ▲定義ファイル読み込み処理▲
 
-        $this->template->head = View::forge('head');
-        $this->template->header = View::forge('header');
-        $this->template->script = View::forge('script');
-        //$this->template->footer = View::forge('footer');
+        $this->template->head = View::forge('exvsfb/head');
+        $this->template->header = View::forge('exvsfb/header');
+        $this->template->script = View::forge('exvsfb/script');
+        //$this->template->footer = View::forge('exvs/footer');
     }
 
     public function action_index(){
