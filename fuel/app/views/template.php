@@ -1,17 +1,24 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <?php echo $head ?>
+  <?php echo $head ?>
 </head>
-<body>
-<header>
-    <?php echo $header ?>
+
+<body class="drawer drawer--left drawer--sidebar">
+
+<header role="banner">
+  <?php echo $header ?>
 </header>
-<div class="container">
+
+<!-- content -->
+<main role="main" class="drawer-contents">
+  <div class="title"><?php echo HP_NAME ?></div>
+  <div class="container">
     <?php echo $content ?>
-</div>
-<footer>
-    <?php echo $footer ?>
-</footer>
+  </div>
+</main>
+
+<?php echo $script ?>
+
 </body>
 </html>

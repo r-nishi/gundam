@@ -1,5 +1,5 @@
-<div class="container">
-    <h3><a href="./index"><?php echo BANSHEE_NORN ?></a></h3>
+<div>
+    <h1><a href="./index"><?php echo BANSHEE_NORN ?></a></h1>
     <p><?php //echo Asset::img('ms/bansheenorn.png') ?></p>
     <hr>
     <h4>■コンボ計算</h4>

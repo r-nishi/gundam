@@ -18,6 +18,7 @@ class Controller_Top extends Controller_Template
         $this->template->head = View::forge('head');
         $this->template->header = View::forge('header');
         $this->template->content = View::forge('top/index');
-        $this->template->footer = View::forge('footer');
+        $this->template->script = View::forge('script');
+        //$this->template->footer = View::forge('footer');
     }
 }
