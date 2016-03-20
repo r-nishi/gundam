@@ -1,4 +1,5 @@
 <meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
 <title><?php HP_NAME ?></title>
 <?php echo Asset::js('common.js') ?>
 <?php echo Asset::css('bootstrap.css') ?>
@@ -23,5 +24,8 @@
         text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);
         border-color:#883ced #883ced #003f81;border-color:rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
     }
-    body { margin: 0px 0px 40px 0px; }
+    body {
+        margin: 0px 0px 40px 0px;
+        -webkit-text-size-adjust: 100%;
+    }
 </style>
