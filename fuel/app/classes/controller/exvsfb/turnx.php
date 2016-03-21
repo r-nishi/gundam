@@ -6,11 +6,19 @@
 class Controller_Exvsfb_Turnx extends Controller_Exvsfb
 {
     public $damage_db;
+    public $template = "exvsfb/ms_template";
 
-    public function before(){
+    public function before()
+    {
         parent::before();
+
         // ダメージ表読込
         $this->damage_db = Config::load('ms/exvsfb/turnx/damage_db');
+
+        $this->template->head = View::forge('exvsfb/head');
+        $this->template->header = View::forge('exvsfb/header');
+        $this->template->script = View::forge('exvsfb/script');
+        //$this->template->footer = View::forge('exvs/footer');
     }
 
     /**
@@ -27,12 +35,26 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
         // セレクトボックス作成
         $select_list = $this->make_select($this->damage_db);
 
-        $path = "exvsfb/ms/turnx/index"; // 機体追加の際,ここだけパスを入れればOKなはず
+        /* 機体追加時 */
+        $this->template->ms_name = TURN_X;
+        $this->template->path_name = "turnx";
+        $content_view = "exvsfb/ms/turnx/index";
 
-        // viewを作成
-        $view = $this->make_view($path,$select_list,$atk_cnt,$sum_name,$sum_damage,$awakening,$sum_down);
+        /* 共通処理 */
+        $this->template->atk_cnt = $atk_cnt;
+        $this->template->select_list = $select_list;
+        $this->template->sum_name = $sum_name;
+        if (!empty($sum_damage)) {
+            $this->template->sum_dame = $sum_damage;
+        }
+        if (!empty($awakening)) {
+            $this->template->awakening = $awakening;
+        }
+        if (!empty($sum_down)) {
+            $this->template->sum_down = $sum_down;
+        }
 
-        $this->template->content = $view;
+        $this->template->content = View::forge($content_view);
     }
 
     /**

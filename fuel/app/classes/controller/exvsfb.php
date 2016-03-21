@@ -50,36 +50,6 @@ class Controller_Exvsfb extends Controller_Template
     }
 
     /**
-     * view作成
-     * @param string $path URL
-     * @param $select_list
-     * @param int $atk_cnt 攻撃回数
-     * @param $sum_name
-     * @param $sum_damage
-     * @param $awakening
-     * @param float $sum_down 累計ダウン値
-     * @return $view view
-     */
-    final protected function make_view($path,$select_list,$atk_cnt,$sum_name,$sum_damage,$awakening,$sum_down)
-    {
-        $view = View::forge($path);
-        $view->set('select_list',$select_list);
-        $view->set('atk_cnt',$atk_cnt);
-        $view->set('sum_name',$sum_name);
-
-        if (!empty($sum_damage)) {
-            $view->set('sum_dame',$sum_damage);
-        }
-        if (!empty($awakening)) {
-            $view->set('awakening',$awakening);
-        }
-        if (!empty($sum_down)) {
-            $view->set('sum_down',$sum_down);
-        }
-        return $view;
-    }
-
-    /**
      * 覚醒補正率を取得
      * @access final protected
      * @param varchar $awakening 覚醒種類(assault/blast)
