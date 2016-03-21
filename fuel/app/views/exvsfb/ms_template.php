@@ -39,7 +39,7 @@
           <br>
           <br>
           コンボ選択
-          <div id="selectBox" style="display:flex; padding-bottom:10px;">
+          <div id="selectBox" style="display:block; padding-bottom:10px;">
               <?php for($i = 1; $atk_cnt >= $i; $i++): ?>
                   <!-- ▼1つのセレクトボックス▼ -->
                   <div id="atk<?php echo $i ?>">
@@ -134,7 +134,7 @@
         if (chk == null) {
             // セレクトボックスを新規作成
             var makeHtmlCode =
-                '&nbsp>> <select name="atk' + numbers + '">' +
+                '&nbsp>>&nbsp&nbsp<select name="atk' + numbers + '">' +
                 '<option value="">選択</option>' +
                 '<?php foreach ($select_list as $key): ?>' +
                 '<option value="<?php echo $key ?>"><?php echo $key ?></option>' +
@@ -152,7 +152,7 @@
         } else {
             // セレクトボックスを新規作成
             var makeHtmlCode =
-                '&nbsp>> <select name="atk' + numbers + '">' +
+                '&nbsp>>&nbsp&nbsp<select name="atk' + numbers + '">' +
                 '<option value="">選択</option>' +
                 '<?php foreach ($select_list as $key): ?>' +
                 '<option value="<?php echo $key ?>"><?php echo $key ?></option>' +
