@@ -114,7 +114,7 @@
           </div>
 
           <?php echo $content ?>
-          <hr>
+
       </div>
   </div>
 </main>
