@@ -32,6 +32,5 @@
     </li>
     <li><a class="drawer-menu-item" href="<?php echo URL_EXVSFB ?>/about"><?php echo ABOUT ?></a></li>
     <li><a class="drawer-menu-item" href="<?php echo URL_EXVSFB ?>/news"><?php echo NEWS ?></a></li>
-    <li><a class="drawer-menu-item" href="<?php echo URL ?>/exvsmbon"><?php echo EXVSMBON ?>ダメージ計算</a></li>
   </ul>
 </nav>

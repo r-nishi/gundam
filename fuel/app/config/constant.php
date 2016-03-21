@@ -11,6 +11,7 @@ return array(
 
     // サイト名
     define("HP_NAME","EXVSFBダメージ計算"),
+    define("HP_NAME_MBON","EXVSMBONダメージ計算"),
 
     // メニューリンク名
     define("TOP","TOP"),
@@ -34,4 +35,7 @@ return array(
 
     // MS名:2500
     define("CHERUDIM","ケルディム"),
+
+    // MS名:2000
+    define("BARBATOS","バルバトス(第四形態)"),
 );
