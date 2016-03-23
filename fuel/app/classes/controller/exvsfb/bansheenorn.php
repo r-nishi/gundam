@@ -15,7 +15,9 @@ class Controller_Exvsfb_Bansheenorn extends Controller_Exvsfb
         // ダメージ表読込
         $this->damage_db = Config::load('ms/exvsfb/bansheenorn/damage_db');
 
-        $this->template->head = View::forge('exvsfb/head');
+        // スーパークラスとはテンプレートを変えた為、再定義
+        $this->template->meta = View::forge('exvsfb/meta');
+        $this->template->css = View::forge('exvsfb/css');
         $this->template->header = View::forge('exvsfb/header');
         $this->template->script = View::forge('exvsfb/script');
         //$this->template->footer = View::forge('exvs/footer');
@@ -39,6 +41,15 @@ class Controller_Exvsfb_Bansheenorn extends Controller_Exvsfb
         $this->template->ms_name = BANSHEE_NORN;
         $this->template->path_name = "bansheenorn";
         $content_view = "exvsfb/ms/bansheenorn/index";
+
+        /* SEO対策 */
+        $keyword = "ガンダム,フルブ,コンボ,exvsfb,ダメージ計算,ダメージ,".BANSHEE_NORN;
+        $description = BANSHEE_NORN."のコンボダメージを計算";
+        $title = BANSHEE_NORN." | ".HP_NAME;
+
+        $this->template->meta_keyword = $keyword;
+        $this->template->meta_description = $description;
+        $this->template->title = $title;
 
         /* 共通処理 */
         $this->template->atk_cnt = $atk_cnt;

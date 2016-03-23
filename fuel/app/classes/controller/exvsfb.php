@@ -25,13 +25,23 @@ class Controller_Exvsfb extends Controller_Template
         $this->awakening_db = Config::load('awakening_db');
         // ▲定義ファイル読み込み処理▲
 
-        $this->template->head = View::forge('exvsfb/head');
+        $this->template->meta = View::forge('exvsfb/meta');
+        $this->template->css = View::forge('exvsfb/css');
         $this->template->header = View::forge('exvsfb/header');
         $this->template->script = View::forge('exvsfb/script');
         //$this->template->footer = View::forge('exvs/footer');
     }
 
     public function action_index(){
+        /* SEO対策 */
+        $keyword = "ガンダム,フルブ,コンボ,exvsfb,ダメージ計算,ダメージ";
+        $description = "EXVSFBの各機体ごとのコンボダメージを計算するサイトです";
+        $title = HP_NAME;
+
+        $this->template->meta_keyword = $keyword;
+        $this->template->meta_description = $description;
+        $this->template->title = $title;
+
         $this->template->content = View::forge('exvsfb/index');
     }
 
