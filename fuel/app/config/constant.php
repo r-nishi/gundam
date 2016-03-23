@@ -30,11 +30,13 @@ return array(
     // MS名:3000
     define("N_GUNDAM","νガンダム"),
     define("V2_GUNDAM","V2ガンダム"),
-    define("TURN_X","ターンX"),
+    define("TURN_X","ターンX"),define("PATH_TURN_X","turnx"),
     define("BANSHEE_NORN","バンシィ・ノルン"),
 
     // MS名:2500
     define("CHERUDIM","ケルディム"),
+    define("TALLGEESE_III","トールギスIII"),define("PATH_TALLGEESE_III","tallgeeseiii"),
+    define("TALLGEESE_II","トールギスII"),
 
     // MS名:2000
     define("BARBATOS","バルバトス(第四形態)"),

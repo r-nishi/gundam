@@ -19,4 +19,12 @@ return array(
         "assault" => 1.12,
         "blast" => 1.03,
     ),
+    TALLGEESE_III => array(
+        "assault" => 1.07,
+        "blast" => 1,
+    ),
+    TALLGEESE_II => array(
+        "assault" => 1.07,
+        "blast" => 1,
+    ),
 );

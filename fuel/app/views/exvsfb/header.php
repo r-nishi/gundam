@@ -19,6 +19,9 @@
       <a class="drawer-menu-item" data-target="#" href="#" data-toggle="dropdown" role="button" aria-expanded="false">
         <?php echo COST_2500 ?> <span class="drawer-caret"></span>
       </a>
+        <ul class="drawer-dropdown-menu">
+            <li><a class="drawer-dropdown-menu-item" href="<?php echo URL_EXVSFB."/".PATH_TALLGEESE_III ?>"><?php echo TALLGEESE_III ?></a></li>
+        </ul>
     </li>
     <li class="drawer-dropdown">
       <a class="drawer-menu-item" data-target="#" href="#" data-toggle="dropdown" role="button" aria-expanded="false">
