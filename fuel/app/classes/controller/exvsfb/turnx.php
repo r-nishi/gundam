@@ -7,10 +7,15 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
 {
     public $damage_db;
     public $template = "exvsfb/ms_template";
+    private $ms_name;
+    private $ms_path;
 
     public function before()
     {
         parent::before();
+
+        $this->ms_name = TURN_X;
+        $this->ms_path = PATH_TURN_X;
 
         // ダメージ表読込
         $this->damage_db = Config::load('ms/exvsfb/turnx/damage_db');
@@ -38,14 +43,14 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
         $select_list = $this->make_select($this->damage_db);
 
         /* 機体追加時 */
-        $this->template->ms_name = TURN_X;
-        $this->template->path_name = "turnx";
-        $content_view = "exvsfb/ms/turnx/index";
+        $this->template->ms_name = $this->ms_name;
+        $this->template->path_name = $this->ms_path;
+        $content_view = "exvsfb/ms/".$this->ms_path."/index";
 
         /* SEO対策 */
-        $keyword = "ガンダム,フルブ,コンボ,exvsfb,ダメージ計算,ダメージ,".TURN_X;
-        $description = TURN_X."のコンボダメージを計算";
-        $title = TURN_X." | ".HP_NAME;
+        $keyword = "ガンダム,フルブ,コンボ,exvsfb,ダメージ計算,ダメージ,".$this->ms_name;
+        $description = $this->ms_name."のコンボダメージを計算";
+        $title = $this->ms_name." | ".HP_NAME;
 
         $this->template->meta_keyword = $keyword;
         $this->template->meta_description = $description;
@@ -78,8 +83,7 @@ class Controller_Exvsfb_Turnx extends Controller_Exvsfb
         // POSTで受け取る
         $data = Input::post();
 
-        $ms_name = TURN_X; // 機体追加の際、ここに機体名の定数を入れてあげる
-        $rtn_data = $this->post_process($data,$ms_name);
+        $rtn_data = $this->post_process($data,$this->ms_name);
 
         return $this->action_index(
             $rtn_data['sum_damage'],
