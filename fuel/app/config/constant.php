@@ -36,8 +36,8 @@ return array(
     // MS名:2500
     define("CHERUDIM","ケルディム"),
     define("TALLGEESE_III","トールギスIII"),define("PATH_TALLGEESE_III","tallgeeseiii"),
-    define("TALLGEESE_II","トールギスII"),
+    define("TALLGEESE_II","トールギスII"),define("PATH_TALLGEESE_II","tallgeeseii"),
 
     // MS名:2000
-    define("BARBATOS","バルバトス(第四形態)"),
+    define("BARBATOS","バルバトス(第四形態)"),define("PATH_BARBATOS","barbatos"),
 );
