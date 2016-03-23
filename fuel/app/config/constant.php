@@ -31,7 +31,7 @@ return array(
     define("N_GUNDAM","νガンダム"),
     define("V2_GUNDAM","V2ガンダム"),
     define("TURN_X","ターンX"),define("PATH_TURN_X","turnx"),
-    define("BANSHEE_NORN","バンシィ・ノルン"),
+    define("BANSHEE_NORN","バンシィ・ノルン"),define("PATH_BANSHEE_NORN","bansheenorn"),
 
     // MS名:2500
     define("CHERUDIM","ケルディム"),
