@@ -7,6 +7,7 @@
 <p><?php echo COST_2500 ?></p>
 <ul>
     <li><a href="<?php echo URL_EXVSFB."/".PATH_TALLGEESE_III ?>"><?php echo TALLGEESE_III ?></a></li>
+    <li><a href="<?php echo URL_EXVSFB."/".PATH_TALLGEESE_II ?>"><?php echo TALLGEESE_II ?></a></li>
 </ul>
 <p><?php echo COST_2000 ?></p>
 <p><?php echo COST_1000 ?></p>
